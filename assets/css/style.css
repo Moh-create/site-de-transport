@@ -1593,3 +1593,65 @@ section {
   color: #3498db;
 }
 
+.float{
+	position:fixed;
+	width:60px;
+	height:60px;
+	bottom:40px;
+	right:40px;
+	background-color:#25d366;
+	color:#FFF;
+	border-radius:50px;
+	text-align:center;
+  font-size:30px;
+	box-shadow: 2px 2px 3px #999;
+  z-index:100;
+}
+
+.my-float{
+	margin-top:16px;
+}
+
+#message{
+  position: fixed;
+	width:300px;
+	height:550px;
+	bottom:120px;
+	right:40px;
+	color:#111;
+	text-align:center;
+  font-size:30px;
+	box-shadow: 2px 2px 3px #999;
+  z-index:100;
+
+}
+
+.description {
+  background-color:#25d366;
+}
+
+.servicewhatsapp {
+    height: 80px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 5%;
+    border-radius: 10px;
+    background-color: #2383c4;
+}
+
+.servicewhatsapp svg {
+
+  float: left;
+   margin-left:10%;
+    margin-top:10%;
+}
+
+.servicewhatsapp a {
+
+  font-size: 16px;
+   color: white; 
+}
+
+.special-spacing {
+  padding-top: 5%;
+}
