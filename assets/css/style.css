@@ -1627,7 +1627,7 @@ section {
 
 }
 
-.description {
+.apercu {
   background-color:#25d366;
 }
 
@@ -1655,4 +1655,23 @@ section {
 
 .special-spacing {
   padding-top: 5%;
+}
+
+.cercle {
+ 
+  height: 40px;
+  width: 40px;
+  font-size: 22px;
+  border: solid #3498db;
+  border-radius: 20px;
+  margin-right: 5%;
+
+}
+
+.etape {
+  display: flex;
+}
+
+.choix-paiement {
+  display: flex;
 }
