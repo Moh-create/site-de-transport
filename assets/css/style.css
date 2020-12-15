@@ -1675,3 +1675,40 @@ section {
 .choix-paiement {
   display: flex;
 }
+.care {
+  margin: auto;
+  display: flex;
+  -webkit-box-pack: justify;
+  justify-content: center;
+  width: 100%;
+  animation: 10s ease 1s infinite normal none running slidein;
+} 
+@keyframes slidein {
+
+  0% {
+    margin-left: 0px;
+  }
+  100%{
+    margin-left: -90%;
+  }
+
+}
+
+.img-px{
+  width: 105px;
+  height: 105px;
+  display: flex;
+  -webkit-box-pack: start;
+  justify-content: start;
+  -webkit-box-align: center;
+  align-items: center;
+  margin-right: 5%;
+}
+
+
+@media (max-width: 800px) {
+
+  .choix-paiement  {
+    display: block;
+  }
+}
