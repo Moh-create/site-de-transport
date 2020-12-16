@@ -1,0 +1,21 @@
+.connexion  {
+    margin-left: 20%;
+    margin-right: 20%;
+    padding: 5%;
+    box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    background-color: #F7F9F9;
+    
+  }
+  @media (max-width: 800px) {
+
+    .choix-paiement  {
+      display: block;
+    }
+  
+    .choix-paiement button  {
+      margin-top: 5%;
+      margin-left: 10%;
+    }
+    
+  }
