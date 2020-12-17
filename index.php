@@ -1,25 +1,27 @@
+
 <!DOCTYPE html>
 <html>
  <head>
  <meta charset="UTF-8">
  <title></title>
  </head>
- <body>
- <table border="1" width="80%" align="center">
+<body>
  <?php
- include_once 'boostrap.inc.php';
- $produits = Pays::fetchAll();
- var_dump($produits);
- foreach ($produits as $unProduit):
+      
+                 include_once 'boostrap.inc.php';
+
+                 $pays = new Pays();//initialisation d'un objet de type Categorie
+                $pays->setCodePays("AL");
+                 $pays->setNomPays("Allemagne");
+                 $pays->save() ;//Sauvegarde de l'objet
+                 var_dump($pays);
+
+
+                // $ville = new Ville();
+                // $ville->setCodeVille("BA");
+                // $ville->setNomVille("Barcelone");
+                // $ville->setPays($pays);
+                //  $ville->save();
+
  ?>
- <tr>
- <td>
- <?php echo $unProduit->getCodePays(); ?>
- </td>
-<td>
- <?php echo $unProduit->getNomPays(); ?>
- </td>
- </tr>
- <?php endforeach; ?>
- </table>
- </body
+ </body>

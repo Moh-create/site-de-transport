@@ -21,6 +21,18 @@ class Pays {
         return $this->codePays;
     }
 
+    /**
+     * Set the value of codePays
+     *
+     * @return  self
+     */ 
+    public function setCodePays($codePays)
+    {
+        $this->codePays = $codePays;
+
+        return $this;
+    }
+
 
     /**
      * Get the value of nomPays
@@ -76,7 +88,7 @@ class Pays {
 
     public function save() {
 
-        if ($this->idProduit == null) {
+        if ($this->codePays == null) {
         $this->insert();
         }
 
