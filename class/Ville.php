@@ -74,7 +74,7 @@ class Ville {
         $ville->pays = Pays::fetch($codePays);
         }
 
-        return $p;
+        return $ville;
     }
 
 
@@ -104,19 +104,10 @@ class Ville {
 
     }
 
-    public function save() {
-
-        if ($this->codeVille == null) {
-        $this->insert();
-        }
-
-        else {
-        $this->update();
-        }
-    }
 
 
-    private function insert(){
+
+    public function insert(){
 
         $pdo = (new DBA())->getPDO();
         $pdoStatement = $pdo->prepare(Ville::$insert);
@@ -131,16 +122,6 @@ class Ville {
         $pdoStatement->execute();
 
         $this->codePays = $pdo->lastInsertId();
-
-    }
-
-
-    private function update() {
-        $pdo = (new DBA())->getPDO();
-        $pdoStatement = $pdo->prepare(Ville::$update);
-        $pdoStatement->bindParam(":codeVille", $this->codeVille);
-        $pdoStatement->bindParam(":nomVille", $this->nomVille);
-        $pdoStatement->execute();
 
     }
 

@@ -10,18 +10,22 @@
       
                  include_once 'boostrap.inc.php';
 
-                 $pays = new Pays();//initialisation d'un objet de type Categorie
-                $pays->setCodePays("AL");
-                 $pays->setNomPays("Allemagne");
-                 $pays->save() ;//Sauvegarde de l'objet
-                 var_dump($pays);
+
+                 $utilisateur = new Utilisateur();//initialisation d'un objet de type Categorie
+                 $utilisateur->setGenre("M");
+                 $utilisateur->setNom("fgdfgd");
+                 $utilisateur->setPrenom("DUPONT");
+                 $utilisateur->setEmail("dfdf@gfgg.com");
+                 $utilisateur->setMotDePasse("test");
+                 $utilisateur->setTelephone("012525555");
+                 $utilisateur->setAdresseRue("fdfdfdfsfs");
+                 $utilisateur->setAdressePostal("78520");
+                 $v = new Ville();
+                 $v = Ville::fetch('PA');
+                 $utilisateur->setAdresseVille($v);
+                 $utilisateur->save();
 
 
-                // $ville = new Ville();
-                // $ville->setCodeVille("BA");
-                // $ville->setNomVille("Barcelone");
-                // $ville->setPays($pays);
-                //  $ville->save();
 
  ?>
  </body>

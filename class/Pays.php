@@ -8,9 +8,8 @@ class Pays {
 
     private static $select = "select * from pays";
     private static $selectById = "select * from pays where codePays = :codePays";
-    private static $insert = "insert into pays (codePays,nomPays) values(:codePays,:nomPays)";
+    private static $insert = "insert into pays (codePays,nomPays) values (:codePays,:nomPays)";
     private static $update = "update pays set nomPays=:nomPays where codePays=:codePays";
-
     private static $delete = "delete from pays where codePays = :codePays";
 
     /**
@@ -86,26 +85,14 @@ class Pays {
 
     }
 
-    public function save() {
 
-        if ($this->codePays == null) {
-        $this->insert();
-        }
-
-        else {
-        $this->update();
-        }
-    }
-
-
-    private function insert(){
+    public function insert(){
 
         $pdo = (new DBA())->getPDO();
         $pdoStatement = $pdo->prepare(Pays::$insert);
         $pdoStatement->bindParam(":codePays", $this->codePays);
         $pdoStatement->bindParam(":nomPays",$this->nomPays);
         $pdoStatement->execute();
-        $this->codePays = $pdo->lastInsertId();
 
     }
 
@@ -122,14 +109,7 @@ class Pays {
         return $resultat;
     }
 
-    private function update() {
-        $pdo = (new DBA())->getPDO();
-        $pdoStatement = $pdo->prepare(Pays::$update);
-        $pdoStatement->bindParam(":codePays", $this->codePays);
-        $pdoStatement->bindParam(":nomPays", $this->nomPays);
-        $pdoStatement->execute();
 
-    }
        
        
        
