@@ -66,7 +66,7 @@ class Ville {
 
         $ville = new Ville();
 
-        $ville->codeVille = $array["codePays"];
+        $ville->codeVille = $array["codeVille"];
         $ville->nomVille = $array["nomVille"];
         $codePays = $array["codePays"];
 

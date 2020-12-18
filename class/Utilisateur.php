@@ -13,6 +13,7 @@ class Utilisateur {
     private $adressePostal;
     private $adresseVille;
     private $pointRelais;
+    private $token;
 
     private static $select = "select * from utilisateur";
     private static $selectById = "select * from utilisateur where id = :id";
@@ -323,14 +324,11 @@ class Utilisateur {
         $pdoStatement->bindParam(":telephone", $this->telephone);
         $pdoStatement->bindParam(":adresseRue", $this->adresseRue);
         $pdoStatement->bindParam(":adressePostal", $this->adressePostal);
-
-        if ($this->adresseVille != null) {
-            $codeVille = $this->adresseVille->getCodeVille();
-            $pdoStatement->bindParam(":adresseVille",$codeVille);
-        }
-
-
+        $codeVille = $this->adresseVille->getCodeVille();
+  
+        $pdoStatement->bindParam(":adresseVille",$codeVille);
         $pdoStatement->execute();
+        var_dump($pdoStatement->debugDumpParams());
        return $this->id = $pdo->lastInsertId();
     }
 
@@ -349,4 +347,24 @@ class Utilisateur {
        
 
 
+
+    /**
+     * Get the value of token
+     */ 
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * Set the value of token
+     *
+     * @return  self
+     */ 
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
 }
