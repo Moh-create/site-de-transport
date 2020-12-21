@@ -8,23 +8,16 @@
 <body>
  <?php
                 include_once 'boostrap.inc.php';
-
-                 $v = new Ville();
-                 $v = Ville::fetch('PA');
-                 var_dump($v);
-
-
-                $utilisateur = new Utilisateur();//initialisation d'un objet de type Categorie
-                $utilisateur->setGenre("P");
-                $utilisateur->setTelephone("5454");
-                $utilisateur->setEmail("gfgfgfgf");
-                $utilisateur->setAdresseRue("fgfdfd");
-                $utilisateur->setAdressePostal("gfgfgfggh");
-                $utilisateur->setPrenom("fgf");
-                $utilisateur->setNom("gfgfg");
-                $utilisateur->setMotDePasse("fdfddf");
-
-                $utilisateur->setAdresseVille($v);
-                $utilisateur->save();
+                
+                $p = new PointRelais();
+                $p->setNom("train");
+                $p->setAdresseRue("gfgfgf");
+                $p->setAdresseVille("Paris");
+                $p->setAdresseCodePostal("75000");
+                $v = new Pays();
+                $v = Pays::fetch("FR");
+                $p->setPays($v);
+                $p->save();
+                
        ?>
  </body>

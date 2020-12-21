@@ -230,6 +230,25 @@ class Utilisateur {
         return $this;
     }
 
+    /**
+     * Get the value of token
+     */ 
+    public function getToken()
+    {
+        return $this->token;
+    }
+
+    /**
+     * Set the value of token
+     *
+     * @return  self
+     */ 
+    public function setToken($token)
+    {
+        $this->token = $token;
+
+        return $this;
+    }
     private static function arrayToUtilisateur(Array $array) {
 
         $utilisateur = new Utilisateur();
@@ -293,7 +312,7 @@ class Utilisateur {
     private function update() {
         $pdo = (new DBA())->getPDO();
         $pdoStatement = $pdo->prepare(Utilisateur::$update);
-        $pdoStatement->bindParam("id", $this->id);
+        $pdoStatement->bindParam(":id", $this->id);
         $pdoStatement->bindParam(":genre", $this->genre);
         $pdoStatement->bindParam(":nom", $this->nom);
         $pdoStatement->bindParam(":email", $this->email);
@@ -348,23 +367,5 @@ class Utilisateur {
 
 
 
-    /**
-     * Get the value of token
-     */ 
-    public function getToken()
-    {
-        return $this->token;
-    }
 
-    /**
-     * Set the value of token
-     *
-     * @return  self
-     */ 
-    public function setToken($token)
-    {
-        $this->token = $token;
-
-        return $this;
-    }
 }
