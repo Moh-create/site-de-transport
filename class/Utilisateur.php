@@ -266,7 +266,7 @@ class Utilisateur {
             $utilisateur->adresseVille  = Ville::fetch($ville);
         }
 
-        $relais = $array["pointRelais"];
+        $relais = $array["idPointRelais"];
         if($relais != null){
             $utilisateur->pointRelais  = PointRelais::fetch($relais);
         }
@@ -347,7 +347,6 @@ class Utilisateur {
   
         $pdoStatement->bindParam(":adresseVille",$codeVille);
         $pdoStatement->execute();
-        var_dump($pdoStatement->debugDumpParams());
        return $this->id = $pdo->lastInsertId();
     }
 
