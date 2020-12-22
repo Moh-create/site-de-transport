@@ -24,19 +24,22 @@
             //     $livraison->setTelephone("00000000");
             //     $livraison->save();
 
-                  $util = new Utilisateur();
-                  $util = Utilisateur::fetch(23);
+                  // $util = new Utilisateur();
+                  // $util = Utilisateur::fetch(23);
 
-                  $livraison = new Livraison();
-                  $livraison = Livraison::fetch("45f1da");
+                  // $livraison = new Livraison();
+                  // $livraison = Livraison::fetch("45f1da");
 
 
-                  $commande = new Commande();
-                  $commande->setDateCommande(time());
-                  $commande->setEtat("attente");
-                  $commande->setUtilisateur($util);
-                  $commande->setLivraison($livraison);
-                  $commande->save();
+                  // $commande = new Commande();
+                  // $commande->setDateCommande(time());
+                  // $commande->setEtat("attente");
+                  // $commande->setUtilisateur($util);
+                  // $commande->setLivraison($livraison);
+                  // $commande->save();
+
+                  header('Location: View/index.html');
+                  exit;
 
                 
        ?>
