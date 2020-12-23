@@ -29,6 +29,7 @@
 
                   // $livraison = new Livraison();
                   // $livraison = Livraison::fetch("45f1da");
+                  // var_dump($livraison);
 
 
                   // $commande = new Commande();
@@ -38,9 +39,34 @@
                   // $commande->setLivraison($livraison);
                   // $commande->save();
 
-                  header('Location: View/index.html');
-                  exit;
+
+                  // $dest = "moha.ans@hotmail.com";
+                  // $sujet = "Email de test";
+                  // $corp = "Salut ceci est un email de test envoyer par un script PHP";
+                  // $headers = "From: stage.bts.sio.conflans.aha@gmail.com";
+                  // if (mail($dest, $sujet, $corp, $headers)) {
+
+                  //   echo "Email envoyé avec succès à $dest ...";
+                  // } else {
+                  //   echo "Échec de l'envoi de l'email...";
+                  // }
+
+                  
+                  // header('location: View/index.html');
+                  // exit;
 
                 
+                  $dest = "stage.bts.sio.conflans.aha@gmail.com";
+                  $sujet = "Email de test";
+                  $corp = "Salut ceci est un email de test envoyer par un script PHP";
+                  $headers = "From: moha.ans@hotmail.com";
+                  if (mail($dest, $sujet, $corp, $headers)) {
+                    echo "Email envoyé avec succès à $dest ...";
+                  } else {
+                    echo "Échec de l'envoi de l'email...";
+                  }
+                
+                  
        ?>
+       
  </body>
