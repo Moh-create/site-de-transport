@@ -1,3 +1,7 @@
+<?php
+include_once '../boostrap.inc.php';
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -73,109 +77,118 @@
     <div class="container">
 
         <div class="connexion mt-4">
-            <form>
-             <div class="row">
+            <form action= "../forms/formulaireInscription.php" method="post" id="formInscription">
+                <div class="row">
 
-               <div class="col-lg-3 col-sm-12">
-                <label for="exampleFormControlInput1">Genre</label>
-                 <select class="form-control">
-                    <option value="M">Mr</option>
-                    <option value="F">Mme</option>
-                </select>
-               </div>
-
-               <div class="col-lg-5 col-sm-12">
-                <label for="exampleFormControlInput1">Nom</label> 
-                <input class="form-control" type="text" placeholder="Dupont" >
-              </div>
-
-              <div class="col-lg-4 col-sm-12">
-                <label for="exampleFormControlInput1">Prenom</label> 
-                <input class="form-control" type="text" placeholder="Pierre">
-              </div>
-
-             </div>
-
-             <div class="row pt-4">
-
-                <div class="col-lg-6 col-sm-12">
-                 <label for="exampleFormControlInput1">E-mail</label> 
-                 <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"placeholder="aaaaa@zzz.com">
-               </div>
- 
-               <div class="col-lg-6 col-sm-12">
-                 <label for="exampleFormControlInput1">Mot de passe</label> 
-                 <input type="password" class="form-control" id="exampleInputPassword1">
-               </div>
- 
-            </div>
-
-            <div class="row pt-4">
-
-                <div class="col-lg-6 col-sm-12">
-                    <label for="exampleFormControlInput1">Numéro indicatif</label>
-                    <select  class="form-control" >
-                        <option>+33</option>
-                        <option>+242</option>
-                        <option>+243</option>
+                  <div class="col-lg-3 col-sm-12">
+                    <label for="exampleFormControlInput1">Genre</label>
+                    <select class="form-control" name="genre">
+                        <option value="M">Mr</option>
+                        <option value="F">Mme</option>
                     </select>
-               </div>
- 
-               <div class="col-lg-6 col-sm-12">
-                 <label for="exampleFormControlInput1">Numéro de télephone</label> 
-                 <input type="number" class="form-control" >
-               </div>
- 
-            </div>
+                  </div>
 
-            <div class="row pt-4">
+                  <div class="col-lg-5 col-sm-12" id="nom">
+                    <label for="exampleFormControlInput1">Nom</label> 
+                    <input class="form-control" name="nom" type="text" placeholder="Dupont" >
+                  </div>
 
-                <div class="col-lg-6 col-sm-12">
+                  <div class="col-lg-4 col-sm-12" id="prenom">
+                    <label for="exampleFormControlInput1">Prenom</label> 
+                    <input class="form-control" name ="prenom"type="text" placeholder="Pierre">
+                  </div>
+
+                </div>
+
+                <div class="row pt-4">
+
+                    <div class="col-lg-6 col-sm-12" id="email">
+                    <label for="exampleFormControlInput1">E-mail</label> 
+                    <input type="email" class="form-control" name="email"id="exampleInputEmail1" aria-describedby="emailHelp"placeholder="aaaaa@zzz.com">
+                  </div>
+    
+                  <div class="col-lg-6 col-sm-12" id="motDePasse">
+                    <label for="exampleFormControlInput1">Mot de passe</label> 
+                    <input type="password" name="motDePasse" class="form-control" id="exampleInputPassword1">
+                  </div>
+    
+                </div>
+
+                <div class="row pt-4">
+
+                  <div class="col-lg-6 col-sm-12" id="pays">   
+                    <label for="exampleFormControlInput1">Pays</label>
+                    <select  class="form-control" name="pays">
+                      <?php
+
+                      $collectionPays = Pays::fetchAll();
+
+                      foreach($collectionPays as $pays)
+                      {
+
+                      ?>
+                        <option value="<?php echo $pays->getCodePays(); ?>"><?php echo $pays->getNomPays(); ?></option>
+                      
+                      <?php
+                      }
+                      ?>
+
+                    </select>
+                  </div>
+
+                  <div class="col-lg-6 col-sm-12" id="ville">   
+                    <label for="exampleFormControlInput1">Ville</label>
+                    <select  class="form-control" name="ville"  >
+                      <?php
+                        $collectionVille = Ville::fetchAll();
+
+                        foreach($collectionVille as $ville)
+                        {
+
+                        ?>
+                          <option value="<?php echo $ville->getCodeVille(); ?>"><?php echo $ville->getNomVille(); ?></option>
+
+                        <?php
+                        }
+                        ?>
+                       
+                    </select>
+                  </div>
+
+                  
+                  <div class="col-lg-6 col-sm-12 pt-4" id="adresse">
                     <label for="exampleFormControlInput1">Adresse Rue</label>
-                    <input class="form-control" type="text" >
-
-               </div>
- 
-               <div class="col-lg-6 col-sm-12">   
-                <label for="exampleFormControlInput1">Ville</label>
-                <input class="form-control" type="text" >
-               </div>
-
-               <div class="col-lg-3 col-sm-12">   
-                <label for="exampleFormControlInput1">Pays</label>
-                <select  class="form-control" >
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
-               </div>
-                <div class="col-lg-4 col-sm-12">   
-                    <label for="exampleFormControlInput1">Etat</label>
-                    <select  class="form-control" >
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                    </select>
-               </div>
-
-               <div class="col-lg-5 col-sm-12">   
-                <label for="exampleFormControlInput1">Code Postal</label>
-                <input class="form-control" type="text" >
-               </div>
-
- 
-            </div>
+                    <input class="form-control" name="adresseRue" type="text" >
+                  </div>
 
 
+                  <div class="col-lg-6 col-sm-12 pt-4" id="codePostal">   
+                    <label for="exampleFormControlInput1">Code Postal</label>
+                    <input class="form-control" type="text" name="codePostal">
+                  </div>                    
 
+                </div>
 
+                <div class="row pt-4">
 
+                  <div class="col-lg-6 col-sm-12" id="indicatif">
+                      <label for="exampleFormControlInput1">Numéro indicatif</label>
+                      <select  class="form-control" name="numeroIndicatif">
+                          <option>+33</option>
+                          <option>+242</option>
+                          <option>+243</option>
+                      </select>
+                </div>
+  
+                <div class="col-lg-6 col-sm-12" id="telephone">
+                  <label for="exampleFormControlInput1">Numéro de télephone</label> 
+                  <input type="number" name="telephone" class="form-control" >
+                </div>
+  
+              </div>
+                <button type="submit" class="btn btn-primary mt-3">S'inscrire</button>
 
-             <button type="submit" class="btn btn-primary mt-3">Se connecter</button>
+              </div>
            </form>
 
            </div>
@@ -183,6 +196,7 @@
 
     </div>
 
+ 
   </main><!-- End #main -->
 
   <a class="float" target="_blank" onclick="myFunction()">
@@ -259,10 +273,111 @@
   <script src="../assets/js/main.js"></script>
 
   <script>
-  $('.carousel').carousel({
-  interval: 1000
-})
-</script>
+    const form = document.getElementById('formInscription');
+
+
+
+    form.addEventListener('submit',function(e){
+   
+
+      for(let i = 0;i<form.length;i++){
+
+        if(i>0 && i<3){
+
+          let chaineNomOuPrenom = form[i].value;
+          if(!chaineNomOuPrenom.match(/^[a-zA-Z]{3,}$/)){
+            e.preventDefault();
+            let parentNomOuPrenom = form[i].parentElement.id;
+            let idParent = document.getElementById(`${parentNomOuPrenom}`);
+
+            let spadn = document.createElement("span");
+            spadn.textContent = "Erreur"; 
+            idParent.appendChild(spadn);
+
+
+          }
+        }
+
+        if(i == 3){
+          let emailSaisie = form[i].value;
+          if(!emailSaisie.match(/^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([_\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$/)){
+            e.preventDefault();
+            let emailId = form[i].parentElement.id;
+            let idParentEmail = document.getElementById(`${emailId}`);
+
+            let spanEmail = document.createElement("span");
+            spanEmail.textContent = "Erreur email"; 
+            idParentEmail.appendChild(spanEmail);
+          }
+        }
+
+        if(i == 8){
+          let nomInput  = form[i].name;
+          let adresseEtatOuCodePostalSaisie = form[i].value;
+          if(nomInput == "codePostal"){
+            if(!adresseEtatOuCodePostalSaisie.match(/^(([0-8][0-9])|(9[0-5])|(2[ab]))[0-9]{3}$/)){
+              e.preventDefault();
+              let idParentCodePostal = document.getElementById('codePostal');
+              let span = document.createElement("span");
+              span.textContent = "Le code postal n'est pas conforme"; 
+              idParentCodePostal.appendChild(span);
+
+            }
+          }
+        }
+
+
+      }
+
+    });
+
+    const pays =  document.getElementById('pays').children[1];
+
+    pays.addEventListener('change', function(e){
+
+
+      if(pays.value == "CD"){
+        document.getElementById('codePostal').hidden = false;
+        let p = document.getElementById('codePostal').children[0];
+        let c = document.getElementById('codePostal').children[1];
+        c.name = "etat";
+        p.innerHTML = "Etat";
+
+        let element = document.getElementById('adresse');
+        element.classList.remove("col-lg-12");
+        
+      }
+      else if (pays.value == "CG")
+      {
+        let p = document.getElementById('codePostal').hidden = true;
+        let element = document.getElementById('adresse');
+        element.classList.add("col-lg-12");
+      }
+      else {
+        document.getElementById('codePostal').hidden = false;
+        let p = document.getElementById('codePostal').children[0];
+        let c = document.getElementById('codePostal').children[1];
+        p.innerHTML = "Code Postal";
+        c.name ="codePostal";
+
+        let element = document.getElementById('adresse');
+        element.classList.remove("col-lg-12");
+
+      }
+      
+
+
+
+    });   
+
+
+
+
+  </script>
+
+
+
+  
 
 </body>
 

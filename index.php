@@ -52,21 +52,10 @@
                   // }
 
                   
-                  // header('location: View/index.html');
-                  // exit;
+                  header('location: View/index.html');
+                  exit;
 
-                
-                  $dest = "stage.bts.sio.conflans.aha@gmail.com";
-                  $sujet = "Email de test";
-                  $corp = "Salut ceci est un email de test envoyer par un script PHP";
-                  $headers = "From: moha.ans@hotmail.com";
-                  if (mail($dest, $sujet, $corp, $headers)) {
-                    echo "Email envoyé avec succès à $dest ...";
-                  } else {
-                    echo "Échec de l'envoi de l'email...";
-                  }
-                
-                  
+
        ?>
        
  </body>

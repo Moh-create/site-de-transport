@@ -14,10 +14,13 @@ class Utilisateur {
     private $adresseVille;
     private $pointRelais;
     private $token;
+    private $etat;
 
     private static $select = "select * from utilisateur";
     private static $selectById = "select * from utilisateur where id = :id";
-    private static $insert = "insert into utilisateur (genre,nom,prenom,email,motDePasse,telephone,adresseRue,adressePostal,codeVille) values(:genre,:nom,:prenom,:email,:motDePasse,:telephone,:adresseRue,:adressePostal,:adresseVille)";
+    private static $selectByEmail = "select * from utilisateur where email = :email";
+    private static $insertFr = "insert into utilisateur (genre,nom,prenom,email,motDePasse,telephone,adresseRue,adressePostal,codeVille) values(:genre,:nom,:prenom,:email,:motDePasse,:telephone,:adresseRue,:adressePostal,:adresseVille)";
+    private static $insertRDC = "insert into utilisateur (genre,nom,prenom,email,motDePasse,telephone,adresseRue,etat,codeVille) values(:genre,:nom,:prenom,:email,:motDePasse,:telephone,:adresseRue,:etat,:adresseVille)";
     private static $update = "update utilisateur set genre=:genre,nom=:nom,prenom=:prenom,email=:email,motDePasse=:motDePasse,telephone=:telephone,adresseRue=:adresseRue,adressePostal=:adressePostal,codeVille =:adresseVille where id=:id";
     private static $delete = "delete from utilisateur where id = :id";
 
@@ -249,6 +252,28 @@ class Utilisateur {
 
         return $this;
     }
+
+    
+    /**
+     * Get the value of etat
+     */ 
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * Set the value of etat
+     *
+     * @return  self
+     */ 
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
     private static function arrayToUtilisateur(Array $array) {
 
         $utilisateur = new Utilisateur();
@@ -270,6 +295,7 @@ class Utilisateur {
         if($relais != null){
             $utilisateur->pointRelais  = PointRelais::fetch($relais);
         }
+        $utilisateur->etat  = $array["etat"];
 
         return $utilisateur;
     }
@@ -292,6 +318,16 @@ class Utilisateur {
         $pdo = (new DBA())->getPDO();
         $pdoStatement = $pdo->prepare(Utilisateur::$selectById);
         $pdoStatement->bindParam(":id", $idUtilisateur);
+        $pdoStatement->execute();
+        $record = $pdoStatement->fetch(PDO::FETCH_ASSOC);
+        $utilisateur = Utilisateur::arrayToUtilisateur($record);
+        return $utilisateur;
+    }
+
+    public static function fetchByEmail($email) {
+        $pdo = (new DBA())->getPDO();
+        $pdoStatement = $pdo->prepare(Utilisateur::$selectByEmail);
+        $pdoStatement->bindParam(":email", $email);
         $pdoStatement->execute();
         $record = $pdoStatement->fetch(PDO::FETCH_ASSOC);
         $utilisateur = Utilisateur::arrayToUtilisateur($record);
@@ -334,25 +370,46 @@ class Utilisateur {
     private function insert() {
 
         $pdo = (new DBA())->getPDO();
-        $pdoStatement = $pdo->prepare(Utilisateur::$insert);
-        $pdoStatement->bindParam(":genre", $this->genre);
-        $pdoStatement->bindParam(":nom", $this->nom);
-        $pdoStatement->bindParam(":prenom", $this->prenom);
-        $pdoStatement->bindParam(":email", $this->email);
-        $pdoStatement->bindParam(":motDePasse", $this->motDePasse);
-        $pdoStatement->bindParam(":telephone", $this->telephone);
-        $pdoStatement->bindParam(":adresseRue", $this->adresseRue);
-        $pdoStatement->bindParam(":adressePostal", $this->adressePostal);
-        $codeVille = $this->adresseVille->getCodeVille();
-  
-        $pdoStatement->bindParam(":adresseVille",$codeVille);
-        $pdoStatement->execute();
+
+        if($this->etat == null){
+
+            $pdoStatement = $pdo->prepare(Utilisateur::$insertFr);
+            $pdoStatement->bindParam(":genre", $this->genre);
+            $pdoStatement->bindParam(":nom", $this->nom);
+            $pdoStatement->bindParam(":prenom", $this->prenom);
+            $pdoStatement->bindParam(":email", $this->email);
+            $pdoStatement->bindParam(":motDePasse", $this->motDePasse);
+            $pdoStatement->bindParam(":telephone", $this->telephone);
+            $pdoStatement->bindParam(":adresseRue", $this->adresseRue);
+            $pdoStatement->bindParam(":adressePostal", $this->adressePostal);
+            $codeVille = $this->adresseVille->getCodeVille();
+    
+            $pdoStatement->bindParam(":adresseVille",$codeVille);
+            $pdoStatement->execute();
+        }
+        else {
+            $pdoStatement = $pdo->prepare(Utilisateur::$insertRDC);
+            $pdoStatement->bindParam(":genre", $this->genre);
+            $pdoStatement->bindParam(":nom", $this->nom);
+            $pdoStatement->bindParam(":prenom", $this->prenom);
+            $pdoStatement->bindParam(":email", $this->email);
+            $pdoStatement->bindParam(":motDePasse", $this->motDePasse);
+            $pdoStatement->bindParam(":telephone", $this->telephone);
+            $pdoStatement->bindParam(":adresseRue", $this->adresseRue);
+            $pdoStatement->bindParam(":etat", $this->etat);
+            $codeVille = $this->adresseVille->getCodeVille();
+    
+            $pdoStatement->bindParam(":adresseVille",$codeVille);
+            $pdoStatement->execute();
+        }
+
+
        return $this->id = $pdo->lastInsertId();
     }
 
     public function delete() {
         $pdo = (new DBA())->getPDO();
-        $pdoStatement = $pdo->prepare(Produit::$delete);
+        $pdoStatement = $pdo->prepare(Utilisateur::$delete);
         $pdoStatement->bindParam("id", $this->id);
         $resultat = $pdoStatement->execute();
         $nblignesAffectees = $pdoStatement->rowCount();
@@ -362,9 +419,4 @@ class Utilisateur {
         }
         return $resultat;
     }
-       
-
-
-
-
-}
+}       

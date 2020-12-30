@@ -1,3 +1,7 @@
+<?php
+session_start();
+include_once '../boostrap.inc.php';
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -50,11 +54,24 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="#index.html">Accueil</a></li>
+          <li class="active"><a href="#index.php">Accueil</a></li>
           <li><a href="presentation.html">Qui sommes nous ?</a></li>
           <li><a href="offre.html">Nos offres</a></li>
-          <li class="get-started"><a href="connexion.html">Se connecter</a></li>
 
+          <?php
+          if(isset($_SESSION["utilisateur"])){
+          ?>
+          <li><a href="pointRelais.php">Vos point relais</a></li>
+          <li class="get-started"><a href="../forms/formulaireDeconnexion.php">Se deconnecter</a></li>
+  
+          <?php
+          }
+          else { 
+          ?>
+          <li class="get-started"><a href="connexion.html">Se connecter</a></li>
+          <?php 
+          }
+          ?>
          
 
       </nav><!-- .nav-menu -->
@@ -162,29 +179,6 @@
       </div>
     </section><!-- End Services Section -->
 
-
-
-    <!-- ======= Features Section ======= -->
-    <section id="features" class="features">
-      <div class="container">
-
-        <div class="section-title" data-aos="fade-up">
-          <h2>Ils nous font confiance </h2>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-6 col-md-4 col-6">
-            <img src="../assets/img/image-entreprise/corporate.jpeg" class="img-fluid aos-init aos-animate " style="margin-left: 30%; margin-top: 15%;" width="300" alt="" data-aos="zoom-in">
-          </div>
-          <div class="col-lg-6 col-md-4 col-6">
-            <img src="../assets/img/image-entreprise/alkacia market.jpeg" class="img-fluid aos-init aos-animate"style="margin-bottom: 10%;" alt="" data-aos="zoom-in">
-          </div>
-        </div>
-
-      </div>
-
-      </div>
-    </section><!-- End Features Section -->
 
    
 

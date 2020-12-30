@@ -11,6 +11,7 @@ class PointRelais {
     
     private static $select = "select * from pointrelais";
     private static $selectById = "select * from pointrelais where id = :id";
+    private static $selectByPays = "select * from pointrelais where codePays = :codePays";
     private static $insert = "insert into pointrelais (nom,adresseRue,adresseVille,adresseCodePostal,codePays) values (:nom,:adresseRue,:adresseVille,:adresseCodePostal,:codePays)";
     private static $update = "update pays set nom=:nom,adresseRue=:adresseRue,adresseVille=:adresseVille,adresseCodePostal=:adresseCodePostal where id=:id";
     private static $delete = "delete from pointrelais where id = :id";
@@ -166,6 +167,22 @@ class PointRelais {
         $record = $pdoStatement->fetch(PDO::FETCH_ASSOC);
         $point = PointRelais::arrayToPointRelais($record);
         return $point;
+
+    }
+
+    public static function fetchByCountry($codePays) {
+        $pdo = (new DBA())->getPDO();
+        $pdoStatement = $pdo->prepare(PointRelais::$selectByPays);
+        $pdoStatement->bindParam(":codePays", $codePays);
+        $pdoStatement->execute();
+
+        $recordSet = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($recordSet as $record) {
+        $collectionPointRelais[] = PointRelais::arrayToPointRelais($record);
+        }
+
+        return $collectionPointRelais;
 
     }
 

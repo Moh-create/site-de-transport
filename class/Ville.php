@@ -7,6 +7,7 @@ class Ville {
     
     private static $select = "select * from ville";
     private static $selectById = "select * from ville where codeVille = :codeVille";
+    private static $selectByPays = "select * from ville where codePays = :codePays";
     private static $insert = "insert into pays (codeVille,nomVille,codePays) values(:codeVille,:nomVille,:codePays)";
     private static $update = "update pays set nomVille=:nomVille where codeVille=:codeVille  ";
     private static $delete = "delete from pays where codeVille = :codeVille";
@@ -102,6 +103,20 @@ class Ville {
         $produit = Ville::arrayToVille($record);
         return $produit;
 
+    }
+
+    public static function fetchByPays($codePays) {
+        $collectionProduit = null;
+        $pdo = (new DBA())->getPDO();
+        $pdoStatement = $pdo->prepare(Ville::$selectByPays);
+        $pdoStatement->bindParam(":codePays", $codePays);
+        $pdoStatement->execute();
+        $recordSet = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($recordSet as $record) {
+        $collectionProduit[] = Ville::arrayToVille($record);
+        }
+
+        return $collectionProduit;
     }
 
 
