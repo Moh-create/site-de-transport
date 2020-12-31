@@ -8,11 +8,13 @@ class Livraison {
     private $adresseRue;
     private $ville;
     private $telephone;
+    private $etat;
 
     private static $select = "select * from livraison";
     private static $selectById = "select * from livraison where idLivraison = :idLivraison";
-    private static $insert = "insert into livraison (id,idLivraison,adresseRue,codeVille,telephone) values(:id,:idLivrasion,:adresseRue,:ville,:telephone)";
-    private static $update = "update livraison set adresseRue=:adresseRue,codeVille=:ville,telephone=:telephone where id=:id and idLivraison =:idLivraison";
+    private static $selectByUtilisateur = "select * from livraison where id = :id";
+    private static $insert = "insert into livraison (id,idLivraison,adresseRue,codeVille,telephone,etat) values(:id,:idLivrasion,:adresseRue,:ville,:telephone,:etat)";
+    private static $update = "update livraison set adresseRue=:adresseRue,codeVille=:ville,telephone=:telephone, etat=:etat where id=:id and idLivraison =:idLivraison";
     private static $delete = "delete from livraison where id = :id";
 
 
@@ -106,6 +108,30 @@ class Livraison {
         return $this;
     }
 
+
+    
+
+    /**
+     * Get the value of etat
+     */ 
+    public function getEtat()
+    {
+        return $this->etat;
+    }
+
+    /**
+     * Set the value of etat
+     *
+     * @return  self
+     */ 
+    public function setEtat($etat)
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+
     
     public function save() {
 
@@ -139,6 +165,7 @@ class Livraison {
 
         $livraison->adresseRue = $array["adresseRue"];
         $livraison->telephone = $array["telephone"]; 
+        $livraison->etat = $array["etat"]; 
 
         return $livraison;
     }
@@ -171,6 +198,29 @@ class Livraison {
 
     }
 
+    public static function fetchByUtilisateur($codeUtilisateur) {
+
+        $pdo = (new DBA())->getPDO();
+        $pdoStatement = $pdo->prepare(Livraison::$selectByUtilisateur);
+        $pdoStatement->bindParam(":id", $codeUtilisateur);
+        $pdoStatement->execute();
+        $record = $pdoStatement->fetch(PDO::FETCH_ASSOC);
+        $livraison = Livraison::arrayToLivraison($record);
+        return $livraison;
+
+    }
+
+    public static function ExisteUtilisateur($codeUtilisateur) {
+
+        $pdo = (new DBA())->getPDO();
+        $pdoStatement = $pdo->prepare(Livraison::$selectByUtilisateur);
+        $pdoStatement->bindParam(":id", $codeUtilisateur);
+        $pdoStatement->execute();
+        $count = $pdoStatement->fetchColumn();
+        return $count;
+
+    }
+
 
     private function update() {
         $pdo = (new DBA())->getPDO();
@@ -187,9 +237,9 @@ class Livraison {
         }
         $pdoStatement->bindParam(":ville", $codeVille);
         $pdoStatement->bindParam(":telephone", $this->telephone);
-
+        $pdoStatement->bindParam(':etat',$this->etat);
         $pdoStatement->execute();
-        var_dump($pdoStatement->debugDumpParams());
+
     }
        
 
@@ -215,6 +265,7 @@ class Livraison {
         }
         $pdoStatement->bindParam(":ville", $codeVille);
         $pdoStatement->bindParam(":telephone", $this->telephone);
+        $pdoStatement->bindParam(':etat',$this->etat);
         $pdoStatement->execute();
         return $this->id = $pdo->lastInsertId();
     }
@@ -232,6 +283,5 @@ class Livraison {
         }
         return $resultat;
     }
-
 
 }

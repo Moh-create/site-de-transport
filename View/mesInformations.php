@@ -88,11 +88,299 @@ include_once '../boostrap.inc.php';
       <h2>Mes informations</h2>
     </div>
 
+    <?php
+
+    ?>
+
+
 
 
     <!-- ======= Services Section ======= -->
     <section id="services" class="services">
+
+    <?php
+
+      $utilisateur = Utilisateur::fetch($_SESSION["utilisateur"]);
+
+      $_SESSION["objUser"] = $utilisateur;
+
+    ?>
+
+    <div class="container">
+    <form action= "../forms/modificationInfoUtilisateur.php" method="post" id="formInscription">
+                <div class="row">
+
+                  <div class="col-lg-6 col-sm-12" id="nom">
+                    <label for="exampleFormControlInput1">Nom</label> 
+                    <input class="form-control" name="nom" type="text" placeholder="Dupont" value="<?php echo $utilisateur->getNom(); ?>" >
+                  </div>
+
+                  <div class="col-lg-6 col-sm-12" id="prenom">
+                    <label for="exampleFormControlInput1">Prenom</label> 
+                    <input class="form-control" name ="prenom"type="text" placeholder="Pierre" value="<?php echo $utilisateur->getPrenom(); ?>">
+                  </div>
+
+                </div>
+
+                <div class="row pt-4">
+
+                    <div class="col-lg-6 col-sm-12" id="email">
+                    <label for="exampleFormControlInput1">E-mail</label> 
+                    <input type="email" class="form-control" name="email"id="exampleInputEmail1" aria-describedby="emailHelp"placeholder="aaaaa@zzz.com" value="<?php echo $utilisateur->getEmail(); ?>">
+                  </div>
+
+                  <div class="col-lg-6 col-sm-12" id="ville">   
+                    <label for="exampleFormControlInput1">Ville</label>
+                    <select  class="form-control" name="ville">
+                      <?php
+                        $collectionVille = Ville::fetchAll();
+
+                        foreach($collectionVille as $ville)
+                        {
+                        if($ville->getCodeVille() == $utilisateur->getAdresseVille()->getCodeVille()){
+
+                        
+                        ?>
+                        
+                          <option value="<?php echo $ville->getCodeVille(); ?>" selected><?php echo $ville->getNomVille(); ?></option>
+                        <?php
+                          }else{
+
+                        ?>
+
+                          <option value="<?php echo $ville->getCodeVille(); ?>"><?php echo $ville->getNomVille(); ?></option>
+
+                        <?php
+                          }
+                        }
+                        ?>
+                       
+                    </select>
+                  </div>
+
+
+    
+                </div>
+
+                <div class="row pt-4">
+                  
+                  <div class="col-lg-6 col-sm-12 " id="adresse">
+                    <label for="exampleFormControlInput1">Adresse Rue</label>
+                    <input class="form-control" name="adresseRue" type="text" value="<?php echo $utilisateur->getAdresseRue(); ?>">
+                  </div>
+
+
+                  <?php
+                  if($utilisateur->getEtat() != null){
+                  
+                  ?>
+
+                  <div class="col-lg-6 col-sm-12 " id="etat">
+                    <label for="exampleFormControlInput1">Etat</label>
+                    <input class="form-control" name="etat" type="text" value="<?php echo $utilisateur->getEtat(); ?>">
+                  </div>
+
+
+                  <?php
+
+                  }else {
+
+                  ?>
+                  <div class="col-lg-6 col-sm-12 " id="etat">
+                    <label for="exampleFormControlInput1">Adresse Postal</label>
+                    <input class="form-control" name="adressePostal" type="text" value="<?php echo $utilisateur->getAdressePostal(); ?>">
+                  </div>
+
+                  <?php } ?>
+                  
+                  
+
+
+                </div>
+
+                <div class="row pt-4">
+
+                <div class="col-lg-12 col-sm-12" id="telephone">
+                  <label for="exampleFormControlInput1">Numéro de télephone</label> 
+                  <input type="text" name="telephone" class="form-control" value="<?php echo $utilisateur->getTelephone(); ?>" >
+                </div>
+  
+              </div>
+                <button type="submit" class="btn btn-primary mt-3">Modifier</button>
+
+              </div>
+           </form>
+
+    </div>
+
+
     </section><!-- End Services Section -->
+
+    <div class="section-title" data-aos="fade-up">
+      <h2>Adresse de livraison</h2>
+    </div>
+    <section id="services" class="services">
+
+<?php
+  $livraison = new Livraison();
+ $p =  Livraison::ExisteUtilisateur($_SESSION["utilisateur"]);
+  if($p == 0){
+
+?>
+
+
+<div class="container">
+<form action= "../forms/formulaireAjouterLivraison.php" method="post" id="formInscription">
+                  <div class="row">
+
+                    <div class="col-lg-6 col-sm-12" id="nom">
+                      <label for="exampleFormControlInput1">Adresse Rue</label> 
+                      <input class="form-control" name="adresseRue" type="text" >
+                    </div>
+
+                    <div class="col-lg-6 col-sm-12" id="prenom">
+                      <label for="exampleFormControlInput1">Ville</label> 
+                      <select  class="form-control" name="ville">
+                      <?php
+                        $collectionVille = Ville::fetchAll();
+
+                        foreach($collectionVille as $ville)
+                        {
+
+                        ?>    
+                          <option value="<?php echo $ville->getCodeVille(); ?>"><?php echo $ville->getNomVille(); ?></option>
+                           
+                        <?php
+                          
+                        }
+                        ?>
+                       
+                    </select>
+                    </div>
+
+                  </div>
+
+                  <div class="row pt-4">
+
+                        <div class="col-lg-6 col-sm-12" id="nom">
+                          <label for="exampleFormControlInput1">Etat</label> 
+                          <input class="form-control" name="etat" type="text" >
+                        </div>
+
+                        <div class="col-lg-6 col-sm-12" id="prenom">
+                          <label for="exampleFormControlInput1">Telehone</label> 
+                          <input class="form-control" name ="telephone" type="text"  >
+                        </div>
+
+                  </div>
+
+
+
+
+            <button type="submit" class="btn btn-primary mt-3">Ajouter</button>                  
+            </form>
+
+
+
+</div>
+
+  
+
+
+
+
+
+
+<?php
+    
+  }
+  else{
+    $livraison = new Livraison();
+    $livraison =  Livraison::fetchByUtilisateur($_SESSION["utilisateur"]);
+
+    $_SESSION["objLivraison"] = $livraison;
+  ?>
+
+
+
+<div class="container">
+<form action= "../forms/formulaireModificationLivraison.php" method="post" id="formInscription">
+                  <div class="row">
+
+                    <div class="col-lg-6 col-sm-12" id="nom">
+                      <label for="exampleFormControlInput1">Adresse Rue</label> 
+                      <input class="form-control" name="adresseRue" type="text" value="<?php echo $livraison->getAdresseRue() ?>">
+                    </div>
+
+                    <div class="col-lg-6 col-sm-12" id="prenom">
+                      <label for="exampleFormControlInput1">Ville</label> 
+                      <select  class="form-control" name="ville">
+                      <?php
+                        $collectionVille = Ville::fetchAll();
+
+                        foreach($collectionVille as $ville)
+                        {
+                        if($ville->getCodeVille() == $livraison->getVille()->getCodeVille()){
+
+                        
+                        ?>
+                        
+                          <option value="<?php echo $ville->getCodeVille(); ?>" selected><?php echo $ville->getNomVille(); ?></option>
+                        <?php
+                          }else{
+
+                        ?>
+
+                          <option value="<?php echo $ville->getCodeVille(); ?>"><?php echo $ville->getNomVille(); ?></option>
+
+                        <?php
+                          }
+                        }
+                        ?>
+                       
+                    </select>
+                    </div>
+
+                  </div>
+
+                  <div class="row pt-4">
+
+                        <div class="col-lg-6 col-sm-12" id="nom">
+                          <label for="exampleFormControlInput1">Etat</label> 
+                          <input class="form-control" name="etat" type="text" value="<?php echo $livraison->getEtat(); ?>">
+                        </div>
+
+                        <div class="col-lg-6 col-sm-12" id="prenom">
+                          <label for="exampleFormControlInput1">Telehone</label> 
+                          <input class="form-control" name ="telephone" type="text"  value="<?php echo $livraison->getTelephone(); ?>">
+                        </div>
+
+                  </div>
+
+
+
+
+            <button type="submit" class="btn btn-primary mt-3">Modifier</button>                  
+            </form>
+
+
+
+</div>
+
+
+
+
+<?php
+  }
+
+
+?>
+           
+
+</div>
+
+
+</section><!-- End Services Section -->
 
 
 

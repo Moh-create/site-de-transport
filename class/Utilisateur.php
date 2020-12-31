@@ -351,6 +351,7 @@ class Utilisateur {
         $pdoStatement->bindParam(":id", $this->id);
         $pdoStatement->bindParam(":genre", $this->genre);
         $pdoStatement->bindParam(":nom", $this->nom);
+        $pdoStatement->bindParam(":prenom", $this->prenom);
         $pdoStatement->bindParam(":email", $this->email);
         $pdoStatement->bindParam(":motDePasse", $this->motDePasse);
         $pdoStatement->bindParam(":telephone", $this->telephone);
