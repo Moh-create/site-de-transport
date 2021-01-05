@@ -405,8 +405,14 @@ class Utilisateur {
         }
 
 
+
+ 
+
        return $this->id = $pdo->lastInsertId();
     }
+
+
+
 
     public function delete() {
         $pdo = (new DBA())->getPDO();

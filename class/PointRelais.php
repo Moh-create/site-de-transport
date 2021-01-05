@@ -10,7 +10,7 @@ class PointRelais {
     private $pays;
     
     private static $select = "select * from pointrelais";
-    private static $selectById = "select * from pointrelais where id = :id";
+    private static $selectById = "select * from pointrelais where idPointRelais = :id";
     private static $selectByPays = "select * from pointrelais where codePays = :codePays";
     private static $insert = "insert into pointrelais (nom,adresseRue,adresseVille,adresseCodePostal,codePays) values (:nom,:adresseRue,:adresseVille,:adresseCodePostal,:codePays)";
     private static $update = "update pays set nom=:nom,adresseRue=:adresseRue,adresseVille=:adresseVille,adresseCodePostal=:adresseCodePostal where id=:id";
@@ -131,6 +131,7 @@ class PointRelais {
     private static function arrayToPointRelais(Array $array) {
 
         $pointRelais = new PointRelais();
+        $pointRelais->id = $array["idPointRelais"];
         $pointRelais->nom = $array["nom"];
         $pointRelais->adresseRue = $array["adresseRue"];
         $pointRelais->adresseVille = $array["adresseVille"];
@@ -169,6 +170,7 @@ class PointRelais {
         return $point;
 
     }
+
 
     public static function fetchByCountry($codePays) {
         $pdo = (new DBA())->getPDO();
@@ -245,5 +247,38 @@ class PointRelais {
         $this->id = null;
         }
         return $resultat;
+    }
+
+    public static function ConvertirPointRelaisEnJson (){
+
+  
+        $collection = PointRelais::fetchAll();
+
+        $fichier = fopen('../assets/json/pointRelais.json',"w");
+        $tab = array();
+        foreach($collection as $pointRelais){
+        
+            $post_data = array(
+        
+               
+                'id' => $pointRelais->getId(),
+                'nom' => $pointRelais->getNom(),
+                'adresseRue' => $pointRelais->getAdresseRue(),
+                'adresseVille' => $pointRelais->getAdresseVille(),
+                'adresseCodePostal' => $pointRelais->getAdresseCodePostal(),
+                'pays' => array(
+        
+                    'codePays' => $pointRelais->getPays()->getCodePays(),
+                    'nomPays' => $pointRelais->getPays()->getNomPays(),                  
+                ),
+                        
+            );
+
+
+            $tab[] = $post_data;
+        }
+        
+        fwrite($fichier,json_encode($tab));
+
     }
 }

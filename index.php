@@ -52,7 +52,7 @@
                   // }
 
                   
-                  header('location: View/index.html');
+                  header('location: View/index.php');
                   exit;
 
 
