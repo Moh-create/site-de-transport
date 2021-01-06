@@ -23,9 +23,9 @@ if(isset($_POST['adresseRue']) && isset($_POST['ville']) && isset($_POST['etat']
 
     $livraison->save();
 
-    header('location : ../View/mesInformations.php');
+    header('location: ../View/mesInformations.php');
     exit;
 }else {
-    header('location : ../View/mesInformations.php');
+    header('location: ../View/mesInformations.php');
     exit;
 }

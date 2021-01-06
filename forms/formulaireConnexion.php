@@ -2,7 +2,7 @@
 
 include_once '../boostrap.inc.php';
 
-if(isset($_POST['email']) && isset($_POST['motDePasse'])){
+if(!empty($_POST['email']) && !empty($_POST['motDePasse'])){
 
     
 
@@ -25,6 +25,9 @@ if(isset($_POST['email']) && isset($_POST['motDePasse'])){
 
     }
 
+}else {
+    
+    header('location: ../View/connexion.html');
 }
 
 ?>

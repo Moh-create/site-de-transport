@@ -7,11 +7,13 @@ class Commande {
     private $etat;
     private $utilisateur;
     private $livraison;
-
+    private $pointRelaisEurope;
+    private $pointRelaisAfrique;
 
     private static $select = "select * from commande";
-    private static $selectById = "select * from commande where idCommande = :idCommande";
-    private static $insert = "insert into commande (idCommande,dateCommande,etat,id,idLivraison) values(:idCommande,:dateCommande,:etat,:id,:idLivraison)";
+    private static $selectByUser = "select * from commande where id = :id";
+    private static $insertLivraison = "insert into commande (idCommande,dateCommande,id,idLivraison,idPointRelaisEurope) values(:idCommande,:dateCommande,:id,:idLivraison,:idPointRelaisEurope)";
+    private static $insertPointRelais = "insert into commande (idCommande,dateCommande,id,idPointRelaisEurope,idPointRelaisAfrique) values(:idCommande,:dateCommande,:id,:idPointRelaisEurope,:idPointRelaisAfrique)";
     private static $update = "update commande set etat=:etat where idCommande=:idCommande";
     private static $delete = "delete from commande where idCommande = :idCommande";
 
@@ -104,6 +106,49 @@ class Commande {
     }
 
 
+    /**
+     * Get the value of pointRelaisEurope
+     */ 
+    public function getPointRelaisEurope()
+    {
+        return $this->pointRelaisEurope;
+    }
+
+    /**
+     * Set the value of pointRelaisEurope
+     *
+     * @return  self
+     */ 
+    public function setPointRelaisEurope(PointRelais $pointRelaisEurope)
+    {
+        $this->pointRelaisEurope = $pointRelaisEurope;
+
+        return $this;
+    }
+
+
+    
+    /**
+     * Get the value of pointRelaisAfrique
+     */ 
+    public function getPointRelaisAfrique()
+    {
+        return $this->pointRelaisAfrique;
+    }
+
+    /**
+     * Set the value of pointRelaisAfrique
+     *
+     * @return  self
+     */ 
+    public function setPointRelaisAfrique(PointRelais $pointRelaisAfrique)
+    {
+        $this->pointRelaisAfrique = $pointRelaisAfrique;
+
+        return $this;
+    }
+
+
     
     private static function arrayToCommande(Array $array) {
 
@@ -111,7 +156,8 @@ class Commande {
 
         $commande->idCommande = $array["idCommande"];
         $commande->dateCommande = $array["dateCommande"];
-        $etat = $array["etat"];
+
+        $commande->etat = $array["etat"];
 
         $codeUtilisateur = $array["id"];
 
@@ -124,6 +170,19 @@ class Commande {
         if($codeLivraison != null){
         $commande->livraison = Livraison::fetch($codeLivraison);
         }
+
+        $codePointRelaisEurope = $array["idPointRelaisEurope"];
+
+        if($codePointRelaisEurope != null){
+            $commande->pointRelaisEurope = PointRelais::fetch($codePointRelaisEurope);
+        }
+
+        $codePointRelaisAfrique = $array["idPointRelaisAfrique"];
+
+        if($codePointRelaisAfrique != null){
+            $commande->pointRelaisAfrique = PointRelais::fetch($codePointRelaisAfrique);
+        }
+
 
         return $commande;
     }
@@ -156,6 +215,22 @@ class Commande {
     }
 
 
+    public static function fetchByUtilisateur($codeUtilisateur) {
+        $collectionCommande = null;
+        $pdo = (new DBA())->getPDO();
+        $pdoStatement = $pdo->prepare(Commande::$selectByUser);
+        $pdoStatement->bindParam(":id", $codeUtilisateur);
+        $pdoStatement->execute();
+        $recordSet = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($recordSet as $record) {
+        $collectionCommande[] = Commande::arrayToCommande($record);
+        }
+
+        return $collectionCommande;
+    }
+
+
     public function save() {
 
         if ($this->idCommande == null) {
@@ -168,30 +243,78 @@ class Commande {
 
     private function insert() {
 
+
         $pdo = (new DBA())->getPDO();
-        $pdoStatement = $pdo->prepare(Commande::$insert);
 
-        $bytes = openssl_random_pseudo_bytes(4, $cstrong);
-        $hex   = bin2hex($bytes);
-        $this->idCommande = $hex;
 
-        $pdoStatement->bindParam(":idCommande", $this->idCommande);
-        $pdoStatement->bindParam(":dateCommande", $this->dateCommande);
-        $pdoStatement->bindParam(":etat", $this->etat);
+        if($this->livraison != null){
+            $pdoStatement = $pdo->prepare(Commande::$insertLivraison);
+            $bytes = openssl_random_pseudo_bytes(4, $cstrong);
+            $hex   = bin2hex($bytes);
+            $this->idCommande = $hex;
 
-        if ($this->utilisateur != null) {
-            $codeUtilisateur = $this->utilisateur->getId();
+            $pdoStatement->bindParam(":idCommande", $this->idCommande);
+            $pdoStatement->bindParam(":dateCommande", $this->dateCommande);
+
+
+            if ($this->utilisateur != null) {
+                $codeUtilisateur = $this->utilisateur->getId();
+            }
+            $pdoStatement->bindParam(":id",$codeUtilisateur);
+
+
+            if ($this->livraison != null) {
+                $codeLivraison = $this->livraison->getIdLivraison();
+            }
+            $pdoStatement->bindParam(":idLivraison",$codeLivraison);
+
+
+            if ($this->pointRelaisEurope != null) {
+                $codePointRelaisEurope = $this->pointRelaisEurope->getId();
+            }
+            $pdoStatement->bindParam(":idPointRelaisEurope",$codePointRelaisEurope);
+
+
+            $pdoStatement->execute();
         }
-        
-        $pdoStatement->bindParam(":id",$codeUtilisateur);
-        if ($this->livraison != null) {
-            $codeLivraison = $this->livraison->getIdLivraison();
+
+
+
+        else {
+
+            $pdoStatement = $pdo->prepare(Commande::$insertPointRelais);
+            $bytes = openssl_random_pseudo_bytes(4, $cstrong);
+            $hex   = bin2hex($bytes);
+            $this->idCommande = $hex;
+
+            $pdoStatement->bindParam(":idCommande", $this->idCommande);
+            $pdoStatement->bindParam(":dateCommande", $this->dateCommande);
+
+
+            if ($this->utilisateur != null) {
+                $codeUtilisateur = $this->utilisateur->getId();
+            }
+            $pdoStatement->bindParam(":id",$codeUtilisateur);
+
+
+
+            if ($this->pointRelaisEurope != null) {
+                $codePointRelaisEurope = $this->pointRelaisEurope->getId();
+            }
+            $pdoStatement->bindParam(":idPointRelaisEurope",$codePointRelaisEurope);
+
+            
+            if ($this->pointRelaisAfrique != null) {
+                $codePointRelaisAfrique = $this->pointRelaisAfrique->getId();
+            }
+            $pdoStatement->bindParam(":idPointRelaisAfrique",$codePointRelaisAfrique);
+
+            $pdoStatement->execute();
+
+
+
+
         }
-
-        $pdoStatement->bindParam(":idLivraison",$codeLivraison);
-        $pdoStatement->execute();
-
-        return $this->id = $pdo->lastInsertId();
 
     }
 
@@ -222,10 +345,5 @@ class Commande {
         }
         return $resultat;
     }
-
-
-
-
-
 
 }

@@ -86,151 +86,254 @@ include_once '../boostrap.inc.php';
         <div class="row justify-content-center pt-4">
             <div class="choix-paiement align-items-center">
             <div class="col-lg-7 col-md-12">
-                 <button type="button" class="btn btn-outline-primary " onclick="AddCommande()">Ajouter une commande</button>
+                 <button type="button" class="btn btn-outline-primary " onclick="addCommande()">Ajouter une commande</button>
             </div>
             <div class="col-lg-6 col-md-12">
-                <button type="button" class="btn btn-outline-primary " onclick="ViewCommande()">Voir mes commandes</button>
+                <button type="button" class="btn btn-outline-primary " onclick="voirCommande()">Voir mes commandes</button>
             </div>
            
             </div>
         </div>
 
 
-        <div id="ajouterCommmande ">
-            <?php
-                    $utlisateur = new Utilisateur();
-                    $utlisateur = Utilisateur::fetch($_SESSION["utilisateur"]);
+        <div id="ajouterCommande">
+                <?php
+                        $utlisateur = new Utilisateur();
+                        $utlisateur = Utilisateur::fetch($_SESSION["utilisateur"]);
 
 
-                    $pointRelais = new PointRelais();
-                    $pointRelais = $utlisateur->getPointRelais();
+                        $pointRelais = new PointRelais();
+                        $pointRelais = $utlisateur->getPointRelais();
 
 
 
-            ?>
+                ?>
 
-            <div class="container pt-5">
-                <div class="row justify-content-md-center pt-5">
+                <div class="container pt-5">
+                    <div class="row justify-content-md-center pt-5">
                     
-                    <div class="col-lg-10">
-                        
-                        <div class="etape">
-                            <div class="cercle">
-                                <p class="text-center">1</p>                       
-                            </div>  
-                            <h2>Commander en ligne</h2>                         
-                        </div>
-                        <p class="text-justify pt-3">Commandez en ligne sur le site de votre choix en utilisant l’adresse de relais fournie
-                            par notre service.</p>
-                    </div>
-
-
-                    <div class="col-lg-10 pt-5">
-                        
-                        <div class="etape">
-                            <div class="cercle">
-                                <p class="text-center">2</p>                       
-                            </div>  
-                            <h2>Votre adresse de Point-Relais en Europe</h2>                         
-                        </div>
-                        <p class="text-justify pt-3"><u> <strong>Saisir les informations suivantes lors d'une commande :</strong> </u></p>
-                        <p class="text-justify pt-3">Nom :  <?php echo $pointRelais->getNom(); ?></p>
-                        <p class="text-justify pt-3">Adresse :  <?php echo $pointRelais->getAdresseRue(); ?></p>
-                        <p class="text-justify pt-3">Ville :  <?php echo $pointRelais->getAdresseVille(); ?></p>
-                        <p class="text-justify pt-3">Code Postal :  <?php echo $pointRelais->getAdresseCodePostal(); ?></p>
-                        <p class="text-justify pt-3">Pays :  <?php echo $pointRelais->getPays()->getNomPays(); ?></p>
-
-                    </div>
-
-
-
-                    <div class="col-lg-10 pt-5 pb-3">
-                        
+                        <div class="col-lg-10">
+                            
                             <div class="etape">
                                 <div class="cercle">
-                                    <p class="text-center">3</p>                       
+                                    <p class="text-center">1</p>                       
                                 </div>  
-                                <h2>Choisir votre mode de livraison</h2>                         
+                                <h2>Commander en ligne</h2>                         
                             </div>
-
-                                <div id="modeLivraison">
-                                    <form method="post" action="../forms/formulaireAjouterCommande.php">
-                                        <div class="form-check pt-3">                                                
-                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" onchange="ClickPointRelais()">
-                                            <label class="form-check-label" for="defaultCheck1">
-                                            Point-Relais
-                                            </label>
-                                        </div>    
-                                        <div id="lesPointsRelais">
-                                            <select  class="form-control mt-3 mb-5" name="pointRelais">
-
-                                            <option selected>Choisir un point Relais</option>
-                                            <?php
-                                                $collectionPointRelais = PointRelais::fetchAll();
-
-                                                foreach($collectionPointRelais as $pointRelais)
-                                                {
-                                                    if($pointRelais->getPays()->getCodePays() != "FR")
-                                                    {
-                                            ?>
-                                                <option value="<?php echo $pointRelais->getId(); ?>"><?php echo $pointRelais->getNom(); ?></option>
-                                                        
-
-                                            <?php
-                                                    }
-                                        
-
-                                                }
-                                            ?>
-
-                                            </select>
-
-                    
-                                        </div>
-
-                                       
-                                    </form>
-
-                                    <form method="post" action="../forms/formulaireAjouterCommande.php">                
-                                        <div class="form-check pt-3">
-                                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck2"  onchange="clickAdresseLivraison()">
-                                            <label class="form-check-label pb-4" for="defaultCheck2">
-                                                Livraison à la maison ou aux bureaux
-                                            </label>
-
-                                        </div>                    
-                                            <?php
-                                                $livraison = new Livraison();
-
-                                                $livraison = Livraison::fetchByUtilisateur($_SESSION["utilisateur"]);
-
-                                            ?>
-
-                                        <div id="adresseLivraison">    
-
-                                            <p> adresse : <?php echo $livraison->getAdresseRue(); ?> </p>
-                                            <p> telephone : <?php echo $livraison->getTelephone(); ?> </p>
-                                            <p> Ville : <?php echo $livraison->getVille()->getNomVille(); ?> </p>
-                                            <p> Pays : <?php echo $livraison->getVille()->getPays()->getNomPays(); ?> </p>
+                            <p class="text-justify pt-3">Commandez en ligne sur le site de votre choix en utilisant l’adresse de relais fournie
+                                par notre service.</p>
+                        </div>
 
 
-                           
-                                        <button type="button" class="btn btn-primary">Ajouter une commande</button>                 
+                        <div class="col-lg-10 pt-5">
+                            
+                            <div class="etape">
+                                <div class="cercle">
+                                    <p class="text-center">2</p>                       
+                                </div>  
+                                <h2>Votre adresse de Point-Relais en Europe</h2>                         
+                            </div>
+                            <p class="text-justify pt-3"><u> <strong>Saisir les informations suivantes lors d'une commande :</strong> </u></p>
+                            <p class="text-justify pt-3">Nom :  <?php echo $pointRelais->getNom(); ?></p>
+                            <p class="text-justify pt-3">Adresse :  <?php echo $pointRelais->getAdresseRue(); ?></p>
+                            <p class="text-justify pt-3">Ville :  <?php echo $pointRelais->getAdresseVille(); ?></p>
+                            <p class="text-justify pt-3">Code Postal :  <?php echo $pointRelais->getAdresseCodePostal(); ?></p>
+                            <p class="text-justify pt-3">Pays :  <?php echo $pointRelais->getPays()->getNomPays(); ?></p>
 
-                                        </div>
+                        </div>
 
 
-                                    </form>
-                                    
+
+                        <div class="col-lg-10 pt-5 pb-3">
+                            
+                                <div class="etape">
+                                    <div class="cercle">
+                                        <p class="text-center">3</p>                       
+                                    </div>  
+                                    <h2>Choisir votre mode de livraison</h2>  
 
                                 </div>
 
-                    </div>
+                                    <div id="modeLivraison">
+                                        <form method="post" action="../forms/formulaireAjouterCommande.php">
+                                            <div class="form-check pt-3">                                                
+                                                <input class="form-check-input" type="checkbox" value="pt" name="modePointRelais" id="defaultCheck1" onchange="ClickPointRelais()">
+                                                <label class="form-check-label" for="defaultCheck1">
+                                                Point-Relais
+                                                </label>
+                                            </div>    
+                                            <div id="lesPointsRelais">
+                                                <select  class="form-control mt-3 mb-5" name="pointRelais">
 
-                    
+                                                <option selected>Choisir un point Relais</option>
+                                                <?php
+                                                    $collectionPointRelais = PointRelais::fetchAll();
+
+                                                    foreach($collectionPointRelais as $pointRelais)
+                                                    {
+                                                        if($pointRelais->getPays()->getCodePays() != "FR")
+                                                        {
+                                                ?>
+                                                    <option value="<?php echo $pointRelais->getId(); ?>"><?php echo $pointRelais->getNom(); ?></option>
+                                                            
+
+                                                <?php
+                                                        }
+                                            
+
+                                                    }
+                                                ?>
+
+                                                </select>
+
+                        
+                                            </div>
+
+                                        
+                                        </form>
+
+                                        <form method="post" action="../forms/formulaireAjouterCommande.php">                
+                                            <div class="form-check pt-3">
+                                                <input class="form-check-input" type="checkbox" value="lv" name="modeLivraison" id="defaultCheck2"  onchange="clickAdresseLivraison()">
+                                                <label class="form-check-label pb-4" for="defaultCheck2">
+                                                    Livraison à la maison ou aux bureaux
+                                                </label>
+
+                                            </div>                    
+                                                <?php
+                                                    $livraison = new Livraison();
+
+                                                    $livraison = Livraison::fetchByUtilisateur($_SESSION["utilisateur"]);
+
+                                                ?>
+
+                                            <div id="adresseLivraison">    
+
+                                                <p> adresse : <?php echo $livraison->getAdresseRue(); ?> </p>
+                                                <p> telephone : <?php echo $livraison->getTelephone(); ?> </p>
+                                                <p> Ville : <?php echo $livraison->getVille()->getNomVille(); ?> </p>
+                                                <p> Pays : <?php echo $livraison->getVille()->getPays()->getNomPays(); ?> </p>
+                                                <button type="submit" class="btn btn-primary">Ajouter une commande</button>                 
+                                            </div>
+
+
+                                        </form>
+                                        
+
+                                    </div>
+                        </div>                 
+                    </div>
+                </div>
+            </div>
+
+
+        <div id="voirCommande">
+            <div class="container">
+
+            <?php
+            
+            $collectionCommande = Commande::fetchByUtilisateur($_SESSION["utilisateur"]);                              
+            foreach($collectionCommande as $commande){
+            
+            ?>                           
+                <div class="col-lg-12 mt-5">
+                
+                        <div class="card">
+                            <h5 class="card-header">Numero de commande : <?php echo $commande->getIdCommande(); ?> </h5>
+                                <div class="card-body">
+                                    <p class="card-text">Date de la commande : <?php echo date('d/m/Y',$commande->getDateCommande()); ?></p>
+                                    <p class="card-text">Etat : <?php echo $commande->getEtat(); ?></p>
+                                    <?php 
+
+                                    if($commande->getLivraison() != null)
+
+                                    {
+                                         $livraison = new Livraison();
+                                         $livraison = $commande->getLivraison();
+
+                                    ?>
+                        
+                                    <h4 class="card-subtitle mb-2 text-muted"><u>Adresse de livraison :</u></h4>
+                                    <p class="card-text">adresse : <?php echo  $livraison->getAdresseRue(); ?></p>
+                                    <p class="card-text">Telephone : <?php echo $livraison->getTelephone(); ?></p>
+                                    <p class="card-text">Etat : <?php echo $livraison->getEtat(); ?></p>
+                                    <p class="card-text">Ville : <?php echo $livraison->getVille()->getNomVille(); ?></p>                                                           
+                                    <p class="card-text">Pays : <?php echo $livraison->getVille()->getPays()->getNomPays(); ?></p>          
+
+
+                                    <?php        
+                                    }
+                                    else
+                                    {
+
+                                        $pointRelais = new PointRelais();
+                                        $pointRelais = $commande->getPointRelaisAfrique();
+
+                                    ?>
+
+
+                                    <h4 class="card-subtitle mb-2 text-muted"><u>Point Relais :</u></h4>
+                                    <p class="card-text">nom : <?php echo  $pointRelais->getNom(); ?></p>
+
+                                    <?php
+                                        if($pointRelais->getAdresseRue() != null)
+                                        {
+
+                                    ?>
+
+
+                                            <p class="card-text">Adresse : <?php echo  $pointRelais->getAdresseRue(); ?></p>
+
+                                    <?php
+                                        }
+                                        else if($pointRelais->getAdresseVille() != null) 
+                                        {
+                                    ?>
+
+
+                                            <p class="card-text">Adresse : <?php echo  $pointRelais->getAdresseVille(); ?></p>
+
+
+                                    <?php
+                                        }
+
+                                        else if($pointRelais->getAdresseCodePostal() != null)
+                                        {
+
+    
+                                    ?>
+
+                                         <p class="card-text">Code Postal : <?php echo  $pointRelais->getAdresseCodePostal(); ?></p>
+
+
+                                    <?php    
+                                        }
+                                    ?>
+
+                             
+
+                                        <p class="card-text">Pays : <?php echo  $pointRelais->getPays()->getNomPays(); ?></p>
+
+                                    <?php
+
+                                    }
+                                
+                                    ?>
+
+
+                                </div>
+                        </div>        
+                
                 </div>
 
+            <?php
+            }
+            ?>
+
+
+
             </div>
+
 
         </div>
 
@@ -257,6 +360,8 @@ include_once '../boostrap.inc.php';
 
       document.getElementById('lesPointsRelais').hidden = true;
       document.getElementById('adresseLivraison').hidden = true;
+      document.getElementById('voirCommande').hidden = true;
+
     function ClickPointRelais(){
 
        let verification =  document.getElementById('modeLivraison').children[0][0].checked;
@@ -290,6 +395,17 @@ include_once '../boostrap.inc.php';
 
     }
 
+
+
+    function addCommande(){
+        document.getElementById('ajouterCommande').hidden = false;
+        document.getElementById('voirCommande').hidden = true;
+    }
+
+    function voirCommande(){
+        document.getElementById('voirCommande').hidden = false;
+        document.getElementById('ajouterCommande').hidden = true;
+    }
 
 
 
@@ -396,7 +512,7 @@ include_once '../boostrap.inc.php';
 
     
 
-    const bouttonModeLivrasion = document.getElementById('modeLivraison').children[1].children[1].children[4];
+    const bouttonModeLivrasion = document.getElementById('modeLivraison').children[1][0];
 
     
     bouttonModeLivrasion.addEventListener('click', function(event) {         
@@ -408,8 +524,39 @@ include_once '../boostrap.inc.php';
             let createSpan =  document.createElement('span');
             createSpan.innerHTML = "Veuillez choisir un des solutions proposées";
 
-            document.getElementById('modeLivraison').children[1].children[1].insertBefore(createSpan,bouttonModeLivrasion); 
 
+            if(document.getElementById('modeLivraison').children[2] == null) 
+            {
+                document.getElementById('modeLivraison').appendChild(createSpan);
+
+            }
+            
+
+        }
+
+    });
+
+
+
+    const boutonPointRelais = document.getElementById('modeLivraison').children[0][0];
+
+    
+    boutonPointRelais.addEventListener('click', function(event) {         
+
+        if(document.getElementById('modeLivraison').children[0][0].checked == true && document.getElementById('modeLivraison').children[1][0].checked == true)
+        {
+            event.preventDefault();
+
+            let createSpan =  document.createElement('span');
+            createSpan.innerHTML = "Veuillez choisir un des solutions proposées";
+
+
+            if(document.getElementById('modeLivraison').children[2] == null) 
+            {
+                document.getElementById('modeLivraison').appendChild(createSpan);
+
+            }
+            
 
         }
 
