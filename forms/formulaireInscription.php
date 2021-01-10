@@ -9,7 +9,7 @@ if( isset($_POST["genre"]) && isset($_POST["nom"]) && isset($_POST["prenom"]) &&
 
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        header('location: ../View/inscription.html');
+        header('location: ../View/inscription.php');
         exit;
     }
 
@@ -39,12 +39,23 @@ if( isset($_POST["genre"]) && isset($_POST["nom"]) && isset($_POST["prenom"]) &&
 
     $ville = new Ville();
     $ville = $ville::fetch($_POST["ville"]);
-    $utilisateur->setAdresseVille($ville);
-    $utilisateur->setAdresseRue($_POST["adresseRue"]);
+    if(is_bool($ville))
+    {
+        header('location: ../View/inscription.php');
+        exit;
+    }else{
+        $utilisateur->setAdresseVille($ville);
 
+    }
+
+    $utilisateur->setAdresseRue($_POST["adresseRue"]);        
     $utilisateur->save();
 
+    header('location: ../View/commande.php');
+    exit;
 
-
+}else {
+    header('location: ../View/inscription.php');
+    exit;
 }
 ?>

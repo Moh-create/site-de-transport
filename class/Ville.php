@@ -82,6 +82,8 @@ class Ville {
 
     public static function fetchAll() {
         $collectionProduit = null;
+
+        
         $pdo = (new DBA())->getPDO();
         $pdoStatement = $pdo->query(Ville::$select);
         $recordSet = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
@@ -100,8 +102,16 @@ class Ville {
         $pdoStatement->bindParam(":codeVille", $codeVille);
         $pdoStatement->execute();
         $record = $pdoStatement->fetch(PDO::FETCH_ASSOC);
-        $produit = Ville::arrayToVille($record);
-        return $produit;
+        if($record == null)
+        {
+            $p = false;
+            return $p;
+
+        }else{
+            $produit = Ville::arrayToVille($record);
+            return $produit;            
+        }
+
 
     }
 

@@ -205,8 +205,17 @@ class Livraison {
         $pdoStatement->bindParam(":id", $codeUtilisateur);
         $pdoStatement->execute();
         $record = $pdoStatement->fetch(PDO::FETCH_ASSOC);
-        $livraison = Livraison::arrayToLivraison($record);
-        return $livraison;
+
+        if($record == null){
+            $p = false;
+
+            return $p;
+        }else {
+            
+            $livraison = Livraison::arrayToLivraison($record);
+            return $livraison;
+        }
+
 
     }
 

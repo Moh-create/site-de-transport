@@ -21,7 +21,7 @@ class Utilisateur {
     private static $selectByEmail = "select * from utilisateur where email = :email";
     private static $insertFr = "insert into utilisateur (genre,nom,prenom,email,motDePasse,telephone,adresseRue,adressePostal,codeVille) values(:genre,:nom,:prenom,:email,:motDePasse,:telephone,:adresseRue,:adressePostal,:adresseVille)";
     private static $insertRDC = "insert into utilisateur (genre,nom,prenom,email,motDePasse,telephone,adresseRue,etat,codeVille) values(:genre,:nom,:prenom,:email,:motDePasse,:telephone,:adresseRue,:etat,:adresseVille)";
-    private static $update = "update utilisateur set genre=:genre,nom=:nom,prenom=:prenom,email=:email,motDePasse=:motDePasse,telephone=:telephone,adresseRue=:adresseRue,adressePostal=:adressePostal,codeVille =:adresseVille where id=:id";
+    private static $update = "update utilisateur set genre=:genre,nom=:nom,prenom=:prenom,email=:email,motDePasse=:motDePasse,telephone=:telephone,adresseRue=:adresseRue,adressePostal=:adressePostal,codeVille =:adresseVille,token = :token where id=:id";
     private static $delete = "delete from utilisateur where id = :id";
 
 
@@ -296,7 +296,7 @@ class Utilisateur {
             $utilisateur->pointRelais  = PointRelais::fetch($relais);
         }
         $utilisateur->etat  = $array["etat"];
-
+        $utilisateur->token = $array["token"];
         return $utilisateur;
     }
 
@@ -329,10 +329,36 @@ class Utilisateur {
         $pdoStatement = $pdo->prepare(Utilisateur::$selectByEmail);
         $pdoStatement->bindParam(":email", $email);
         $pdoStatement->execute();
+        $c = $pdoStatement->rowCount();
+        $utilisateur = null;
+       
+        if($c > 0)
+        {
+            $record = $pdoStatement->fetch(PDO::FETCH_ASSOC);
+            $utilisateur = Utilisateur::arrayToUtilisateur($record);
+        }
+ 
+                 
+        
+        return $utilisateur;   
+    }
+
+    public static function ExistEmail($email) {
+        $pdo = (new DBA())->getPDO();
+        $pdoStatement = $pdo->prepare(Utilisateur::$selectByEmail);
+        $pdoStatement->bindParam(":email", $email);
+        $pdoStatement->execute();
         $record = $pdoStatement->fetch(PDO::FETCH_ASSOC);
         $utilisateur = Utilisateur::arrayToUtilisateur($record);
-        return $utilisateur;
+        
+        $exist = true;
+        if($utilisateur == null){
+            $exist = false;
+        }
+
+        return $exist;
     }
+
 
     public function save() {
 
@@ -357,7 +383,7 @@ class Utilisateur {
         $pdoStatement->bindParam(":telephone", $this->telephone);
         $pdoStatement->bindParam(":adresseRue", $this->adresseRue);
         $pdoStatement->bindParam(":adressePostal", $this->adressePostal);
-
+        $pdoStatement->bindParam(":token",$this->token);
         if ($this->adresseVille != null) {
             $codeVille = $this->adresseVille->getCodeVille();
         }

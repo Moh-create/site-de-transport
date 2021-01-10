@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+if($_SESSION["utilisateur"] == null)
+{
+  header('location: index.php');
+}
 include_once '../boostrap.inc.php';
 ?>
 

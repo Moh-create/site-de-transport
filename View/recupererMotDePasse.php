@@ -65,30 +65,21 @@
           <div class="container">
 
             <div class="section-title" data-aos="fade-up">
-              <h2>Connexion</h2>
+              <h2>mot de passe oublié</h2>
 
               <div class="connexion mt-4">
-               <form action="../forms/formulaireConnexion.php" method="post">
-                <div class="form-group">
-                  <label for="exampleInputEmail1" style="float: left;">Adresse e-mail</label>
-                  <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp">
-                </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1" style="float: left;">Mot de passe</label>
-                  <input type="password" class="form-control" name="motDePasse" id="exampleInputPassword1">
-                </div>
+                <div id="recuperation">
+                  <form action="../forms/recuperationCode.php" method="post">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1" style="float: left;">Saisir le numero de récupération</label>
+                      <input class="form-control" name="token">
 
-                <div class="row">
-                  <div class=" col-lg-6 col-sm-12">
-                  <a href="inscription.php">Créer votre compte Pickme up ?</a>
-                  </div>
-                  <div class="col-lg-6 col-sm-12">
-                    <a href="motDePasseOublie.php">Mot de passe oublié ?</a>
-                  </div>
+                      <label for="exampleInputEmail1" style="float: left;">Saisir le nouveau mot de Passe</label>
+                      <input type="password" class="form-control" name="motDePasse">
+                    </div>
+                    <button class="btn btn-primary mt-3">Envoyer</button>
+                  </form>
                 </div>
-
-                <button type="submit" class="btn btn-primary mt-3">Se connecter</button>
-              </form>
 
               </div>
 
@@ -119,5 +110,13 @@
     
       <!-- Template Main JS File -->
       <script src="../assets/js/main.js"></script>
+
+
+ 
+
+
+
+
+
 </body>
 </html>

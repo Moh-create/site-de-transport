@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+
+if($_SESSION["utilisateur"] == null)
+{
+  header('location: index.php');
+}
+
 include_once '../boostrap.inc.php';
 ?>
 <!DOCTYPE html>
@@ -133,12 +140,26 @@ include_once '../boostrap.inc.php';
                                 </div>  
                                 <h2>Votre adresse de Point-Relais en Europe</h2>                         
                             </div>
+                            <?php
+                                if($pointRelais != null)
+                                {
+
+                                
+                            ?>
                             <p class="text-justify pt-3"><u> <strong>Saisir les informations suivantes lors d'une commande :</strong> </u></p>
                             <p class="text-justify pt-3">Nom :  <?php echo $pointRelais->getNom(); ?></p>
                             <p class="text-justify pt-3">Adresse :  <?php echo $pointRelais->getAdresseRue(); ?></p>
                             <p class="text-justify pt-3">Ville :  <?php echo $pointRelais->getAdresseVille(); ?></p>
                             <p class="text-justify pt-3">Code Postal :  <?php echo $pointRelais->getAdresseCodePostal(); ?></p>
                             <p class="text-justify pt-3">Pays :  <?php echo $pointRelais->getPays()->getNomPays(); ?></p>
+
+                            <?php
+                              }  else{
+                            ?>
+                                <h4 class="pt-3" style="color:red;">Vous n'avez de point relais attribué en Europe</h4>
+                            <?php
+                                }
+                            ?>
 
                         </div>
 
@@ -209,12 +230,30 @@ include_once '../boostrap.inc.php';
 
                                             <div id="adresseLivraison">    
 
+                                            <?php
+                                                if(!is_bool($livraison)){
+
+                                                
+                                            ?>
                                                 <p> adresse : <?php echo $livraison->getAdresseRue(); ?> </p>
                                                 <p> telephone : <?php echo $livraison->getTelephone(); ?> </p>
                                                 <p> Ville : <?php echo $livraison->getVille()->getNomVille(); ?> </p>
                                                 <p> Pays : <?php echo $livraison->getVille()->getPays()->getNomPays(); ?> </p>
                                                 <button type="submit" class="btn btn-primary">Ajouter une commande</button>                 
                                             </div>
+
+                                            <?php
+                                                }
+                                                else {
+                                            ?>
+                                            <button type="button" class="btn btn-primary"><a href="mesInformations.php" style="color:white">Ajouter une adresse de livraison</a></button>   
+                                            
+                                            <?php
+
+
+                                                }
+
+                                            ?>
 
 
                                         </form>

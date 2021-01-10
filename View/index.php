@@ -62,6 +62,7 @@ include_once '../boostrap.inc.php';
           if(isset($_SESSION["utilisateur"])){
           ?>
           <li><a href="pointRelais.php">Vos point relais</a></li>
+          <li><a href="commande.php">Commande</a></li>          
           <li><a href="mesInformations.php">Mon compte</a></li>
           <li class="get-started"><a href="../forms/formulaireDeconnexion.php">Se deconnecter</a></li>
   
