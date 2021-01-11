@@ -7,7 +7,7 @@ class DBA {
 
  public function __construct() {
     $this->pdo = new PDO(
-    'mysql:host=localhost;dbname=e-commerce', 'client', 'test123',
+    'mysql:host=localhost;dbname=e-commerce', 'adminW', 'adminSiteWeb',
     array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
  }
 

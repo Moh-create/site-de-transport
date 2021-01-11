@@ -64,6 +64,7 @@ class Pays {
     public static function fetchAll() {
         $collectionProduit = null;
         $pdo = (new DBA())->getPDO();
+      
         $pdoStatement = $pdo->query(Pays::$select);
         $recordSet = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
 

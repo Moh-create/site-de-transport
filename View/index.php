@@ -47,7 +47,7 @@ include_once '../boostrap.inc.php';
     <div class="container d-flex align-items-center">
 
       <div class="logo mr-auto">
-        <h1 class="text-light"><a href="index.html">Pickme <span style="color: #3498d3;">up</span></a></h1>
+        <h1 class="text-light"><a href="index.php">Pickme <span style="color: #3498d3;">up</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
@@ -55,8 +55,8 @@ include_once '../boostrap.inc.php';
       <nav class="nav-menu d-none d-lg-block">
         <ul>
           <li class="active"><a href="#index.php">Accueil</a></li>
-          <li><a href="presentation.html">Qui sommes nous ?</a></li>
-          <li><a href="offre.html">Nos offres</a></li>
+          <li><a href="presentation.php">Qui sommes nous ?</a></li>
+          <li><a href="offre.php">Nos offres</a></li>
 
           <?php
           if(isset($_SESSION["utilisateur"])){

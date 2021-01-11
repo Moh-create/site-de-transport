@@ -191,6 +191,7 @@ class Commande {
     public static function fetchAll() {
         $collectionCommande = null;
         $pdo = (new DBA())->getPDO();
+
         $pdoStatement = $pdo->query(Commande::$select);
         $recordSet = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -245,7 +246,6 @@ class Commande {
 
 
         $pdo = (new DBA())->getPDO();
-
 
         if($this->livraison != null){
             $pdoStatement = $pdo->prepare(Commande::$insertLivraison);

@@ -150,6 +150,7 @@ class PointRelais {
 
         $collectionPointRelais = null;
         $pdo = (new DBA())->getPDO();
+     
         $pdoStatement = $pdo->query(PointRelais::$select);
         $recordSet = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
 
@@ -199,7 +200,6 @@ class PointRelais {
 
 
     private function update() {
-
         $pdo = (new DBA())->getPDO();
         $pdoStatement = $pdo->prepare(PointRelais::$update);
 

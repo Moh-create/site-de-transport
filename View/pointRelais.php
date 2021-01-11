@@ -68,7 +68,10 @@ include_once '../boostrap.inc.php';
           <?php
           if(isset($_SESSION["utilisateur"])){
           ?>
-          <li class="get-started"><a href="connexion.html">Se deconnecter</a></li>
+          <li><a href="pointRelais.php">Vos point relais</a></li>
+          <li><a href="commande.php">Commande</a></li>          
+          <li><a href="mesInformations.php">Mon compte</a></li>
+          <li class="get-started"><a href="../forms/formulaireDeconnexion.php">Se deconnecter</a></li>
 
           <?php
           }
@@ -113,11 +116,11 @@ include_once '../boostrap.inc.php';
           <div class="col-md-6 col-lg-6 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
               <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
-              <h4 class="title"><?php echo $lesPointRelais->getNom(); ?></h4>
-              <p class="description">Adresse : <?php echo $lesPointRelais->getAdresseRue(); ?></p>
-              <p class="description">Ville : <?php echo $lesPointRelais->getAdresseVille(); ?></p>
-              <p class="description">Code  Postal : <?php echo $lesPointRelais->getAdresseCodePostal(); ?></p>
-              <p class="description">Pays : <?php echo $lesPointRelais->getPays()->getNomPays();; ?></p>
+              <h4 class="title"><?php echo htmlspecialchars($lesPointRelais->getNom()); ?></h4>
+              <p class="description">Adresse : <?php echo htmlspecialchars($lesPointRelais->getAdresseRue()); ?></p>
+              <p class="description">Ville : <?php echo htmlspecialchars($lesPointRelais->getAdresseVille()); ?></p>
+              <p class="description">Code  Postal : <?php echo htmlspecialchars($lesPointRelais->getAdresseCodePostal()); ?></p>
+              <p class="description">Pays : <?php echo htmlspecialchars($lesPointRelais->getPays()->getNomPays()); ?></p>
             </div>
 
           </div>
@@ -159,8 +162,48 @@ include_once '../boostrap.inc.php';
           <div class="col-md-6 col-lg-6 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
               <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
-              <h4 class="title"><?php echo $lesPointRelais->getNom(); ?></h4>
-              <p class="description">Pays : <?php echo $lesPointRelais->getPays()->getNomPays(); ?></p>
+              <h4 class="title"><?php echo htmlspecialchars($lesPointRelais->getNom()); ?></h4>
+
+
+              <?php
+              if($lesPointRelais->getAdresseRue() != null)
+              {
+
+              ?>
+
+
+                  <p class="description">Adresse : <?php echo  htmlspecialchars($lesPointRelais->getAdresseRue()); ?></p>
+
+              <?php
+              }
+              else if($lesPointRelais->getAdresseVille() != null) 
+              {
+              ?>
+
+
+                  <p class="description">Adresse : <?php echo  htmlspecialchars($lesPointRelais->getAdresseVille()); ?></p>
+
+
+          <?php
+              }
+
+              else if($lesPointRelais->getAdresseCodePostal() != null)
+              {
+
+
+          ?>
+
+                <p class="description">Code Postal : <?php echo  htmlspecialchars($lesPointRelais->getAdresseCodePostal()); ?></p>
+
+
+          <?php    
+              }
+          ?>
+
+    
+
+              <p class="description">Pays : <?php echo  htmlspecialchars($lesPointRelais->getPays()->getNomPays()); ?></p>
+
             </div>
 
           </div>

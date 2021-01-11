@@ -175,6 +175,7 @@ class Livraison {
 
         $collectionLivraison = null;
         $pdo = (new DBA())->getPDO();
+
         $pdoStatement = $pdo->query(Livraison::$select);
         $recordSet = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
 

@@ -1,3 +1,10 @@
+<?php
+
+session_start();
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -43,19 +50,33 @@
     <div class="container d-flex align-items-center">
 
       <div class="logo mr-auto">
-        <h1 class="text-light"><a href="index.html">Pickme <span style="color: #3498d3;">up</span></a></h1>
+        <h1 class="text-light"><a href="index.php">Pickme <span style="color: #3498d3;">up</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="index.html">Accueil</a></li>
-          <li><a href="presentation.html">Qui sommes nous ?</a></li>
-          <li><a href="offre.html">Nos offres</a></li>
-          <li class="get-started"><a href="connexion.html">Se connecter</a></li>
+          <li class="active"><a href="index.php">Accueil</a></li>
+          <li><a href="presentation.php">Qui sommes nous ?</a></li>
+          <li><a href="offre.php">Nos offres</a></li>
 
-         
+          <?php
+          if(isset($_SESSION["utilisateur"])){
+          ?>
+            <li><a href="pointRelais.php">Vos point relais</a></li>
+            <li><a href="commande.php">Commande</a></li>          
+            <li><a href="mesInformations.php">Mon compte</a></li>
+            <li class="get-started"><a href="../forms/formulaireDeconnexion.php">Se deconnecter</a></li>
+  
+          <?php
+          }
+          else { 
+          ?>
+          <li class="get-started"><a href="connexion.html">Se connecter</a></li>
+          <?php 
+          }
+          ?>       
 
       </nav><!-- .nav-menu -->
 

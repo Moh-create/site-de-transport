@@ -147,11 +147,11 @@ include_once '../boostrap.inc.php';
                                 
                             ?>
                             <p class="text-justify pt-3"><u> <strong>Saisir les informations suivantes lors d'une commande :</strong> </u></p>
-                            <p class="text-justify pt-3">Nom :  <?php echo $pointRelais->getNom(); ?></p>
-                            <p class="text-justify pt-3">Adresse :  <?php echo $pointRelais->getAdresseRue(); ?></p>
-                            <p class="text-justify pt-3">Ville :  <?php echo $pointRelais->getAdresseVille(); ?></p>
-                            <p class="text-justify pt-3">Code Postal :  <?php echo $pointRelais->getAdresseCodePostal(); ?></p>
-                            <p class="text-justify pt-3">Pays :  <?php echo $pointRelais->getPays()->getNomPays(); ?></p>
+                            <p class="text-justify pt-3">Nom :  <?php echo htmlspecialchars($pointRelais->getNom()); ?></p>
+                            <p class="text-justify pt-3">Adresse :  <?php echo htmlspecialchars($pointRelais->getAdresseRue()); ?></p>
+                            <p class="text-justify pt-3">Ville :  <?php echo htmlspecialchars($pointRelais->getAdresseVille()); ?></p>
+                            <p class="text-justify pt-3">Code Postal :  <?php echo htmlspecialchars($pointRelais->getAdresseCodePostal()); ?></p>
+                            <p class="text-justify pt-3">Pays :  <?php echo htmlspecialchars($pointRelais->getPays()->getNomPays()); ?></p>
 
                             <?php
                               }  else{
@@ -195,7 +195,7 @@ include_once '../boostrap.inc.php';
                                                         if($pointRelais->getPays()->getCodePays() != "FR")
                                                         {
                                                 ?>
-                                                    <option value="<?php echo $pointRelais->getId(); ?>"><?php echo $pointRelais->getNom(); ?></option>
+                                                    <option value="<?php echo htmlspecialchars($pointRelais->getId()); ?>"><?php echo htmlspecialchars($pointRelais->getNom()); ?></option>
                                                             
 
                                                 <?php
@@ -235,10 +235,10 @@ include_once '../boostrap.inc.php';
 
                                                 
                                             ?>
-                                                <p> adresse : <?php echo $livraison->getAdresseRue(); ?> </p>
-                                                <p> telephone : <?php echo $livraison->getTelephone(); ?> </p>
-                                                <p> Ville : <?php echo $livraison->getVille()->getNomVille(); ?> </p>
-                                                <p> Pays : <?php echo $livraison->getVille()->getPays()->getNomPays(); ?> </p>
+                                                <p> adresse : <?php echo htmlspecialchars($livraison->getAdresseRue()); ?> </p>
+                                                <p> telephone : <?php echo htmlspecialchars($livraison->getTelephone()); ?> </p>
+                                                <p> Ville : <?php echo htmlspecialchars($livraison->getVille()->getNomVille()); ?> </p>
+                                                <p> Pays : <?php echo htmlspecialchars($livraison->getVille()->getPays()->getNomPays()); ?> </p>
                                                 <button type="submit" class="btn btn-primary">Ajouter une commande</button>                 
                                             </div>
 

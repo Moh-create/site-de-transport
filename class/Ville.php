@@ -97,7 +97,7 @@ class Ville {
 
 
     public static function fetch($codeVille) {
-        $pdo = (new DBA())->getPDO();
+        $pdo = (new DBA())->getPDO();;
         $pdoStatement = $pdo->prepare(Ville::$selectById);
         $pdoStatement->bindParam(":codeVille", $codeVille);
         $pdoStatement->execute();
