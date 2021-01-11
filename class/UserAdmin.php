@@ -8,7 +8,8 @@ class UserAdmin {
     private $motDePasse;
 
     
-
+    private static $select = "select * from  userAdmin";
+    private static $selectById = "select * from userAdmin where idUser = :idUser";
 
 
     /**
@@ -109,5 +110,5 @@ class UserAdmin {
 
     }
 
-    
+
 }
