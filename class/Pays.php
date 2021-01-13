@@ -100,12 +100,14 @@ class Pays {
 
     public function delete() {
         $pdo = (new DBA())->getPDO();
+
+
         $pdoStatement = $pdo->prepare(Pays::$delete);
         $pdoStatement->bindParam("codePays", $this->codePays);
         $resultat = $pdoStatement->execute();
         $nblignesAffectees = $pdoStatement->rowCount();
         if ($nblignesAffectees == 1) {
-        $this->idProduit = null;
+        $this->codePays = null;
         }
         return $resultat;
     }

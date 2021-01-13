@@ -78,8 +78,8 @@ class UserAdmin {
         $userAdmin = new UserAdmin();
 
         $userAdmin->id = $array["idUser"];
-        $userAdmin->etat  = $array["nom"];
-        $userAdmin->token = $array["motDePasse"];
+        $userAdmin->nom  = $array["nom"];
+        $userAdmin->motDePasse = $array["motDePasse"];
 
         return $userAdmin;
     }
@@ -93,7 +93,7 @@ class UserAdmin {
         $recordSet = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($recordSet as $record) {
-        $collectionProduit[] = UserAdmin::arrayToAdmin($record);
+        $collectionAdmin[] = UserAdmin::arrayToAdmin($record);
         }
 
         return $collectionAdmin;

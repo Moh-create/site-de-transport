@@ -52,24 +52,16 @@ include_once '../boostrap.inc.php';
     <h2>Connexion</h2>
 
     <div class="connexion mt-4">
-     <form action="../forms/formulaireConnexion.php" method="post">
+     <form action="./forms/connexion.php" method="post">
       <div class="form-group">
-        <label for="exampleInputEmail1" style="float: left;">Adresse e-mail</label>
-        <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <label for="exampleInputEmail1" style="float: left;">Nom</label>
+        <input  class="form-control" name="nom" id="exampleInputEmail1" aria-describedby="emailHelp">
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1" style="float: left;">Mot de passe</label>
         <input type="password" class="form-control" name="motDePasse" id="exampleInputPassword1">
       </div>
 
-      <div class="row">
-        <div class=" col-lg-6 col-sm-12">
-        <a href="inscription.php">Créer votre compte Pickme up ?</a>
-        </div>
-        <div class="col-lg-6 col-sm-12">
-          <a href="motDePasseOublie.php">Mot de passe oublié ?</a>
-        </div>
-      </div>
 
       <button type="submit" class="btn btn-primary mt-3">Se connecter</button>
     </form>
