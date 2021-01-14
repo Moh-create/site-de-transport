@@ -11,6 +11,7 @@ class Commande {
     private $pointRelaisAfrique;
 
     private static $select = "select * from commande";
+    private static $selectById = "select * from commande where idCommande = :idCommande";
     private static $selectByUser = "select * from commande where id = :id";
     private static $insertLivraison = "insert into commande (idCommande,dateCommande,id,idLivraison,idPointRelaisEurope) values(:idCommande,:dateCommande,:id,:idLivraison,:idPointRelaisEurope)";
     private static $insertPointRelais = "insert into commande (idCommande,dateCommande,id,idPointRelaisEurope,idPointRelaisAfrique) values(:idCommande,:dateCommande,:id,:idPointRelaisEurope,:idPointRelaisAfrique)";

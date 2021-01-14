@@ -7,7 +7,9 @@ if($_SESSION["utilisateur"] == null)
   header('location: index.php');
 }
 
+
 include_once '../boostrap.inc.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -58,14 +60,15 @@ include_once '../boostrap.inc.php';
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="#index.php">Accueil</a></li>
-          <li><a href="presentation.html">Qui sommes nous ?</a></li>
+          <li class="active"><a href="index.php">Accueil</a></li>
+          <li><a href="presentation.php">Qui sommes nous ?</a></li>
           <li><a href="offre.html">Nos offres</a></li>
 
           <?php
           if(isset($_SESSION["utilisateur"])){
           ?>
           <li><a href="pointRelais.php">Vos point relais</a></li>
+          <li><a href="commande.php">Commande</a></li>   
           <li><a href="mesInformations.php">Mon compte</a></li>
           <li class="get-started"><a href="../forms/formulaireDeconnexion.php">Se deconnecter</a></li>
   
@@ -108,7 +111,7 @@ include_once '../boostrap.inc.php';
                         $utlisateur = new Utilisateur();
                         $utlisateur = Utilisateur::fetch($_SESSION["utilisateur"]);
 
-
+                        PointRelais::ConvertirPointRelaisEnJson();
                         $pointRelais = new PointRelais();
                         $pointRelais = $utlisateur->getPointRelais();
 
@@ -188,7 +191,7 @@ include_once '../boostrap.inc.php';
 
                                                 <option selected>Choisir un point Relais</option>
                                                 <?php
-                                                    $collectionPointRelais = PointRelais::fetchAll();
+                                                    $collectionPointRelais = PointRelais::fetchPublicPointRelais();
 
                                                     foreach($collectionPointRelais as $pointRelais)
                                                     {
@@ -491,7 +494,7 @@ include_once '../boostrap.inc.php';
                             Object.keys(pointRelaisLecture).forEach(function(key) {
                                 console.table('Key : ' + key + ', Value : ' + pointRelaisLecture[key]);
 
-                                if(pointRelaisLecture[key] != "" && key != "id" ){
+                                if(pointRelaisLecture[key] != "" && key != "id" && pointRelaisLecture[key] != null ){
 
                                     if(key == "pays"){
                                         let c = pointRelaisLecture[key]

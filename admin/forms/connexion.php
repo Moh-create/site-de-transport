@@ -12,14 +12,14 @@ if(isset($_POST["nom"]) && !empty($_POST["nom"]) && isset($_POST["motDePasse"]) 
             if(password_verify($_POST["motDePasse"],$userAdmin->getMotDePasse())){
                 session_start();
                 $_SESSION["userAdmin"] = $userAdmin->getId();
-                header('Location: ../menu.php');
+                header('Location: ../View/menu.php');
                 exit;
             }else{
-                echo "je suis la la";
+                header('location: ../View/index.php');
             }
         }
     }
     
 }else{
-    header('location: ../index.php');
+    header('location: ../View/index.php');
 }

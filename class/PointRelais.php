@@ -8,12 +8,14 @@ class PointRelais {
     private $adresseVille;
     private $adresseCodePostal;
     private $pays;
+    private $afficher;
     
     private static $select = "select * from pointrelais";
     private static $selectById = "select * from pointrelais where idPointRelais = :id";
+    private static $selectByAfficher = "select * from pointrelais where afficher = 1";
     private static $selectByPays = "select * from pointrelais where codePays = :codePays";
     private static $insert = "insert into pointrelais (nom,adresseRue,adresseVille,adresseCodePostal,codePays) values (:nom,:adresseRue,:adresseVille,:adresseCodePostal,:codePays)";
-    private static $update = "update pays set nom=:nom,adresseRue=:adresseRue,adresseVille=:adresseVille,adresseCodePostal=:adresseCodePostal where id=:id";
+    private static $update = "update pointrelais set nom=:nom,adresseRue=:adresseRue,adresseVille=:adresseVille,adresseCodePostal=:adresseCodePostal, afficher=:afficher,codePays=:codePays where idPointRelais=:id";
     private static $delete = "delete from pointrelais where id = :id";
 
 
@@ -126,6 +128,26 @@ class PointRelais {
         return $this;
     }
 
+    /**
+     * Get the value of afficher
+     */ 
+    public function getAfficher()
+    {
+        return $this->afficher;
+    }
+
+    /**
+     * Set the value of afficher
+     *
+     * @return  self
+     */ 
+    public function setAfficher($afficher)
+    {
+        $this->afficher = $afficher;
+
+        return $this;
+    }
+
 
 
     private static function arrayToPointRelais(Array $array) {
@@ -136,7 +158,7 @@ class PointRelais {
         $pointRelais->adresseRue = $array["adresseRue"];
         $pointRelais->adresseVille = $array["adresseVille"];
         $pointRelais->adresseCodePostal = $array["adresseCodePostal"];
-
+        $pointRelais->afficher = $array["afficher"];
         $codePays = $array["codePays"];
 
         if($codePays != null){
@@ -152,6 +174,21 @@ class PointRelais {
         $pdo = (new DBA())->getPDO();
      
         $pdoStatement = $pdo->query(PointRelais::$select);
+        $recordSet = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($recordSet as $record) {
+        $collectionPointRelais[] = PointRelais::arrayToPointRelais($record);
+        }
+
+        return $collectionPointRelais;
+    }
+
+    public static function fetchPublicPointRelais() {
+
+        $collectionPointRelais = null;
+        $pdo = (new DBA())->getPDO();
+     
+        $pdoStatement = $pdo->query(PointRelais::$selectByAfficher);
         $recordSet = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
 
         foreach ($recordSet as $record) {
@@ -213,8 +250,10 @@ class PointRelais {
         }
 
         $pdoStatement->bindParam(":codePays",$codePays);
+        $pdoStatement->bindParam(":afficher",$this->afficher);
+  
         $pdoStatement->execute();
-
+ 
     }
        
 
@@ -281,4 +320,6 @@ class PointRelais {
         fwrite($fichier,json_encode($tab));
 
     }
+
+ 
 }

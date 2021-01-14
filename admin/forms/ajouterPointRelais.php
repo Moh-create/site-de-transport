@@ -1,16 +1,28 @@
 <?php
 
-
+include_once '../../boostrap.inc.php';
 
 if(isset($_POST["nom"]) && !empty($_POST["nom"]) && isset($_POST["adresseRue"]) && !empty($_POST["adresseRue"]) && isset($_POST["pays"]) && !empty($_POST["pays"]))
 {
-    $ville = new Ville();
-    $ville->setCodeVille($_POST["codeVille"]);
-    $ville->setNomVille($_POST["nomVille"]);
+   
+
+    $pointRelais = new PointRelais();
+    $pointRelais->setNom($_POST["nom"]);
+    $pointRelais->setAdresseRue($_POST["adresseRue"]);
     $pays = new Pays();
     $pays = Pays::fetch($_POST["pays"]);
-    $ville->setPays($pays);
-    $ville->insert();
+    $pointRelais->setPays($pays);
 
-    header('location: consulter.php');
+    if(!empty($_POST["adresseVille"])){
+        $pointRelais->setAdresseVille($_POST["adresseVille"]);
+    }
+    if(!empty($_POST["adressePostal"])){
+        $pointRelais->setAdresseCodePostal($_POST["adressePostal"]);
+    }
+    $pointRelais->save();
+
+    header('location: ../View/pointrelais/index.php');
+
+}else{
+    header('location: ../View/pointrelais/index.php');
 }

@@ -9,5 +9,5 @@ if(isset($_POST["codePays"]) && !empty($_POST["codePays"]) && isset($_POST["nomP
     $pays->setNomPays($_POST["nomPays"]);
     $pays->insert();
 
-    header('location: consulter.html');
+    header('location: ../View/pays/index.php');
 }

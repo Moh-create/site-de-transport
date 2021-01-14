@@ -1,4 +1,13 @@
 <?php
+
+session_start();
+
+
+if($_SESSION["userAdmin"] == null)
+{
+  header('location: ../index.php');
+}
+
 include_once '../../../boostrap.inc.php';
 
 ?>
@@ -81,18 +90,53 @@ include_once '../../../boostrap.inc.php';
         <div class="row">
 
           <?php 
-            $collectionVille = Ville::fetchAll();
-            foreach($collectionVille as $ville){
+            $collectionCommande = Commande::fetchAll();
+            foreach($collectionCommande as $commande){
           ?>
 
           <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0 mt-3">
             <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
               <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
-              <h4 class="title"><?php echo htmlspecialchars($ville->getCodeVille()); ?></h4>
-              <p class="description">Nom de la ville : <?php echo htmlspecialchars($ville->getNomVille()); ?></p>
-              <p class="description"> Pays : <?php echo htmlspecialchars($ville->getPays()->getNomPays()); ?></p>
-            </div>
+              <h4 class="title">Numero de commande : <?php echo htmlspecialchars($commande->getIdCommande()); ?></h4>
+              <p class="description">Date : <?php echo htmlspecialchars(date('d/m/Y',$commande->getDateCommande())); ?></p>
+              <p class="description">Etat : <?php echo htmlspecialchars($commande->getEtat()); ?></p><br>
+              <p class="description"><strong>Utilisateur :</strong></p>
+              <p class="description">Nom de l'utilisateur : <?php echo htmlspecialchars($commande->getUtilisateur()->getNom()); ?></p><br>
+              <p class="description"><strong>Point Relais en Europe :</strong></p>
+              <p class="description"> Nom : <?php echo htmlspecialchars($commande->getPointRelaisEurope()->getNom()); ?></p>
+              <p class="description">Adresse : <?php echo htmlspecialchars($commande->getPointRelaisEurope()->getAdresseRue()); ?></p>
+              <p class="description"> Ville : <?php echo htmlspecialchars($commande->getPointRelaisEurope()->getAdresseVille()); ?></p>
+              <p class="description"> Code Postal : <?php echo htmlspecialchars($commande->getPointRelaisEurope()->getAdresseCodePostal()); ?></p>
+              <p class="description"> Pays : <?php echo htmlspecialchars($commande->getPointRelaisEurope()->getPays()->getNomPays()); ?></p><br>
+     
+              <?php
 
+              if($commande->getLivraison() != null){
+              ?>
+              <p class="description"><strong>Adresse de livraion :</strong></p>
+              <p class="description">Adresse : <?php echo htmlspecialchars($commande->getLivraison()->getAdresseRue()); ?></p>
+              <p class="description">Telephone : <?php echo htmlspecialchars($commande->getLivraison()->getTelephone()); ?></p>
+              <p class="description">Etat : <?php echo htmlspecialchars($commande->getLivraison()->getEtat()); ?></p>
+              <p class="description">Ville : <?php echo htmlspecialchars($commande->getLivraison()->getVille()->getNomVille()); ?></p>
+   
+              <?php
+                
+              } else{
+              ?>
+              <p class="description"><strong>Point relais en Afrique :</strong></p>
+              <p class="description"> Nom : <?php echo htmlspecialchars($commande->getPointRelaisAfrique()->getNom()); ?></p>
+              <p class="description">Adresse : <?php echo htmlspecialchars($commande->getPointRelaisAfrique()->getAdresseRue()); ?></p>
+              <p class="description">Ville : <?php echo htmlspecialchars($commande->getPointRelaisAfrique()->getAdresseVille()); ?></p>
+              <p class="description">Pays : <?php echo htmlspecialchars($commande->getPointRelaisAfrique()->getPays()->getNomPays()); ?></p>
+
+
+              <?php
+              }
+
+              ?>
+                <a href="modifier.php?idCommande=<?php echo htmlspecialchars($commande->getIdCommande()); ?>" class="btn btn-primary stretched-link mt-3">Modifier l'état de la commande</a>         
+            </div>
+        
           </div>
 
           <?php

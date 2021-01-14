@@ -1,4 +1,13 @@
 <?php
+
+session_start();
+
+
+if($_SESSION["userAdmin"] == null)
+{
+  header('location: ../index.php');
+}
+
 include_once '../../../boostrap.inc.php';
 
 ?>
@@ -75,35 +84,84 @@ include_once '../../../boostrap.inc.php';
       <div class="container">
 
         <div class="section-title" data-aos="fade-up">
-          <h2>Consulter les pays</h2>
+          <h2>Modifier le point relais</h2>
         </div>
 
-        <div class="row">
-
-          <?php 
-            $collectionPays = Pays::fetchAll();
-            foreach($collectionPays as $pays){
-          ?>
-
-          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0 mt-3">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-              <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
-              <h4 class="title"><?php echo htmlspecialchars($pays->getCodePays()); ?></h4>
-              <p class="description">Nom de Pays : <?php echo htmlspecialchars($pays->getNomPays()); ?></p>
-
-            </div>
-
-          </div>
-
-          <?php
-
+        <?php
+            if(!isset($_GET["idPointRelais"]) && empty($_GET["idPointRelais"])){
+                header('location: consulter.php');
             }
-          ?>
+
+            $idPointRelais = $_GET["idPointRelais"];
+            session_start();
+            $_SESSION["idPointRelais"] = $idPointRelais;
+            $pointRelais = PointRelais::fetch($idPointRelais);
 
 
+
+        ?>
+
+          <form method="post" action="../../forms/modifierPointRelais.php" class="mt-4">
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Nom</label> 
+                    <input class="form-control" name="nom" type="text" value= "<?php echo $pointRelais->getNom(); ?>" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Adresse</label> 
+                    <input class="form-control" name="adresse" type="text" value= "<?php echo $pointRelais->getAdresseRue(); ?>"required >
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Ville</label> 
+                    <input class="form-control" name="ville" type="text" value= "<?php echo $pointRelais->getAdresseVille(); ?>" >
+                </div>
+
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Code Postal</label> 
+                    <input class="form-control" name="codePostal" type="text" value= "<?php echo $pointRelais->getAdresseVille(); ?>">
+                </div>
+
+                <div class="form-group">
+
+                        <label for="exampleFormControlInput1">Pays</label>
+                        <select  class="form-control" name="pays" required>
+                        <?php
+
+                        $collectionPays = Pays::fetchAll();
+
+                        foreach($collectionPays as $pays)
+                        {
+
+                        ?>
+                            <option value="<?php echo $pays->getCodePays(); ?>"><?php echo $pays->getNomPays(); ?></option>
+                        
+                        <?php
+                        }
+                        ?>
+
+                        </select>
+                </div>
+
+
+                <div class="form-group">
+
+                        <label for="exampleFormControlInput1">Afficher</label>
+                        <select  class="form-control" name="afficher" required>
+
+                            <option selected> <?php if($pointRelais->getAfficher() == true){ echo "Oui"; }else{ echo "Non";} ?></option>
+                            <option> <?php if($pointRelais->getAfficher() == false){ echo "Oui"; }else{ echo "Non";} ?></option>
+
+                        </select>
+                </div>
+
+
+
+                <button type="submit" class="btn btn-primary">Moidifier le point relais</button>
+              </form>
         </div>
 
-      </div>
+      
     </section><!-- End Services Section -->
 
 

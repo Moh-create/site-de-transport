@@ -12,5 +12,5 @@ if(isset($_POST["codeVille"]) && !empty($_POST["codeVille"]) && isset($_POST["pa
     $ville->setPays($pays);
     $ville->insert();
 
-    header('location: consulter.php');
+    header('location: ../View/ville/index.php');
 }

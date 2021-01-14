@@ -111,8 +111,14 @@ include_once '../boostrap.inc.php';
           <?php 
             $collectionPointRelaisFrance = PointRelais::fetchByCountry("FR");
             foreach($collectionPointRelaisFrance as $lesPointRelais){
+
+              if($lesPointRelais->getAfficher() == 1)
+              {
+                
+            
           ?>
 
+          
           <div class="col-md-6 col-lg-6 d-flex align-items-stretch mb-5 mb-lg-0">
             <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
               <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
@@ -126,7 +132,7 @@ include_once '../boostrap.inc.php';
           </div>
 
           <?php
-
+              }
             }
           ?>
 
@@ -152,7 +158,7 @@ include_once '../boostrap.inc.php';
             foreach($collectionPointRelais as $lesPointRelais){
 
               $nom = $lesPointRelais->getPays()->getCodePays(); 
-              if($nom != "FR"){
+              if($nom != "FR" && $lesPointRelais->getAfficher() == 1){
 
               
 

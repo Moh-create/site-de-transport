@@ -1,3 +1,16 @@
+<?php
+
+session_start();
+
+
+if($_SESSION["userAdmin"] == null)
+{
+  header('location: ../index.php');
+}
+
+include_once '../../../boostrap.inc.php';
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -63,30 +76,59 @@
 
 
   
-  <main id="main" style="padding-top: 15%;">
+  <main id="main" style="padding-top:10%;">
 
-    <div class="section-title" data-aos="fade-up">
-      <h2>Ajouter un pays</h2>
-    </div>
-    <div class="container">
 
-      <form action="../../forms/ajouterPays.php" method="post">
 
-        <div class="form-group">
-          <label for="exampleInputEmail1">Code Pays</label>
-          <input type="text" class="form-control" name="codePays" placeholder="FR" maxlength="3">
-        </div>
-        
-        <div class="form-group">
-          <label for="exampleInputPassword1">Nom du Pays</label>
-          <input type="text" class="form-control"name="nomPays" placeholder="FRANCE">
+    <section id="services" class="services">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <h2>Confier vos colis à l'une de nos point relais</h2>
         </div>
 
-        <button type="submit" class="btn btn-primary">Envoyer</button>
+        <div class="row">
 
-      </form>
+          <?php 
+            $collectionPointRelaisFrance = PointRelais::fetchAll();
+            foreach($collectionPointRelaisFrance as $lesPointRelais){
+          ?>
 
-    </div>
+          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0 mt-3">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+              <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+              <h4 class="title"><?php echo htmlspecialchars($lesPointRelais->getNom()); ?></h4>
+              <p class="description">Adresse : <?php echo htmlspecialchars($lesPointRelais->getAdresseRue()); ?></p>
+              <p class="description">Ville : <?php echo htmlspecialchars($lesPointRelais->getAdresseVille()); ?></p>
+              <p class="description">Code  Postal : <?php echo htmlspecialchars($lesPointRelais->getAdresseCodePostal()); ?></p>
+              <p class="description">Pays : <?php echo htmlspecialchars($lesPointRelais->getPays()->getNomPays()); ?></p>
+              <p class="description mb-3">Affichage : <?php  if($lesPointRelais->getAfficher() == 1){
+
+               echo "le point relais est affiché au public";
+               
+              }else {
+
+              echo "le point relais n'est pas affiché au public";
+              } ?></p>
+              <a class="btn btn-primary mt-5" href="modifier.php?idPointRelais=<?php echo $lesPointRelais->getId(); ?>" role="button" style="bottom: 2%; position:absolute; float:right;">Modifier</a>
+            </div>
+
+          </div>
+
+          <?php
+
+            }
+
+
+          ?>
+
+         
+
+
+        </div>
+
+      </div>
+    </section><!-- End Services Section -->
 
 
 

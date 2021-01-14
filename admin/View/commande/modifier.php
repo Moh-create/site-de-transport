@@ -1,6 +1,16 @@
 <?php
+
+
+session_start();
+
+
+if($_SESSION["userAdmin"] == null)
+{
+  header('location: ../index.php');
+}
 include_once '../../../boostrap.inc.php';
 
+$collectionEtatCommande = ["attente","en cours","livrée","terminée","annulée","gelée"];
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -75,32 +85,71 @@ include_once '../../../boostrap.inc.php';
       <div class="container">
 
         <div class="section-title" data-aos="fade-up">
-          <h2>Confier vos colis à l'une de nos point relais</h2>
+          <h2>Modifier l'état de la commande </h2>
         </div>
 
-        <div class="row">
+        <div class="row justify-content-md-center pt-5">
 
           <?php 
-            $collectionPointRelaisFrance = PointRelais::fetchAll();
-            foreach($collectionPointRelaisFrance as $lesPointRelais){
+          if(!isset($_GET["idCommande"]) && empty($_GET["idCommande"])){
+              header('location: consulter.php');
+          }
+          $id = $_GET["idCommande"];
+
+            $commande = Commande::fetch($id);
+
+            session_start();
+            $_SESSION["id"] = $id;
+
           ?>
 
-          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0 mt-3">
-            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
-              <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
-              <h4 class="title"><?php echo htmlspecialchars($lesPointRelais->getNom()); ?></h4>
-              <p class="description">Adresse : <?php echo htmlspecialchars($lesPointRelais->getAdresseRue()); ?></p>
-              <p class="description">Ville : <?php echo htmlspecialchars($lesPointRelais->getAdresseVille()); ?></p>
-              <p class="description">Code  Postal : <?php echo htmlspecialchars($lesPointRelais->getAdresseCodePostal()); ?></p>
-              <p class="description">Pays : <?php echo htmlspecialchars($lesPointRelais->getPays()->getNomPays()); ?></p>
+            <div class="col-md-auto">
+
+              <h4 class="title">Numero de commande : <?php echo htmlspecialchars($commande->getIdCommande()); ?></h4>
+              <p class="description">Date : <?php echo htmlspecialchars(date('d/m/Y',$commande->getDateCommande())); ?></p>
+
+
+
+
+              <form method="post" action="../../forms/modifierCommande.php" class="mt-4">
+                <div class="form-group">
+                <label for="exampleInputPassword1">Etat de la commande : </label>
+                  <select class="form-control" name = "etat">
+
+                  <?php
+                    foreach($collectionEtatCommande as $etatCommande){
+
+                      if($etatCommande == $commande->getEtat())
+                      {
+
+                  ?>
+                      <option selected><?php echo htmlspecialchars($etatCommande); ?></option>
+
+                  <?php
+                      }
+                  ?>
+
+                      <option><?php echo htmlspecialchars($etatCommande); ?></option>
+
+                  <?php     
+                    }
+
+                  ?>
+
+                  </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Moidifier l'etat de la commande</button>
+              </form>
+
+
+                 
             </div>
 
+        
           </div>
 
-          <?php
-
-            }
-          ?>
+  
 
 
         </div>

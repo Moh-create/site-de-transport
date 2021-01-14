@@ -1,5 +1,6 @@
 <?php
 
+
 session_start();
 
 
@@ -76,51 +77,44 @@ include_once '../../../boostrap.inc.php';
 
 
   
-  <main id="main" style="padding-top: 15%;">
+  <main id="main" style="padding-top:10%;">
 
-    <div class="section-title" data-aos="fade-up">
-      <h2>Ajouter un pays</h2>
-    </div>
-    <div class="container">
 
-      <form action="../../forms/ajouterVille.php" method="post">
 
-        <div class="form-group">
-          <label for="exampleInputEmail1">Code Ville</label>
-          <input type="text" class="form-control" name="codeVille" placeholder="FR" maxlength="3">
-        </div>
-        
-        <div class="form-group">
-          <label for="exampleInputPassword1">Nom de la Ville</label>
-          <input type="text" class="form-control"name="nomVille" placeholder="FRANCE">
+    <section id="services" class="services">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <h2>Consulter les pays</h2>
         </div>
 
+        <div class="row">
 
-        <div class="form-group">
-            <label for="exampleInputPassword1">Pays</label>
-            <select  class="form-control" name="pays">
-                <?php
+          <?php 
+            $collectionPays = Pays::fetchAll();
+            foreach($collectionPays as $pays){
+          ?>
 
-                $collectionPays = Pays::fetchAll();
+          <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0 mt-3">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+              <div class="icon"><i class="fas fa-map-marker-alt"></i></div>
+              <h4 class="title"><?php echo htmlspecialchars($pays->getCodePays()); ?></h4>
+              <p class="description">Nom de Pays : <?php echo htmlspecialchars($pays->getNomPays()); ?></p>
 
-                foreach($collectionPays as $pays)
-                {
+            </div>
 
-                ?>
-                  <option value="<?php echo $pays->getCodePays(); ?>"><?php echo $pays->getNomPays(); ?></option>
-                
-                <?php
-                }
-                ?>
+          </div>
 
-              </select>
+          <?php
+
+            }
+          ?>
+
+
         </div>
 
-        <button type="submit" class="btn btn-primary">Envoyer</button>
-
-      </form>
-
-    </div>
+      </div>
+    </section><!-- End Services Section -->
 
 
 

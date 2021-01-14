@@ -1,4 +1,13 @@
 <?php
+
+session_start();
+
+
+if($_SESSION["userAdmin"] == null)
+{
+  header('location: ../index.php');
+}
+
 include_once '../../../boostrap.inc.php';
 
 ?>

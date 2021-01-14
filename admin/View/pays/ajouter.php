@@ -9,8 +9,9 @@ if($_SESSION["userAdmin"] == null)
 }
 
 include_once '../../../boostrap.inc.php';
-
 ?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -83,37 +84,16 @@ include_once '../../../boostrap.inc.php';
     </div>
     <div class="container">
 
-      <form action="../../forms/ajouterVille.php" method="post">
+      <form action="../../forms/ajouterPays.php" method="post">
 
         <div class="form-group">
-          <label for="exampleInputEmail1">Code Ville</label>
-          <input type="text" class="form-control" name="codeVille" placeholder="FR" maxlength="3">
+          <label for="exampleInputEmail1">Code Pays</label>
+          <input type="text" class="form-control" name="codePays" placeholder="FR" maxlength="3">
         </div>
         
         <div class="form-group">
-          <label for="exampleInputPassword1">Nom de la Ville</label>
-          <input type="text" class="form-control"name="nomVille" placeholder="FRANCE">
-        </div>
-
-
-        <div class="form-group">
-            <label for="exampleInputPassword1">Pays</label>
-            <select  class="form-control" name="pays">
-                <?php
-
-                $collectionPays = Pays::fetchAll();
-
-                foreach($collectionPays as $pays)
-                {
-
-                ?>
-                  <option value="<?php echo $pays->getCodePays(); ?>"><?php echo $pays->getNomPays(); ?></option>
-                
-                <?php
-                }
-                ?>
-
-              </select>
+          <label for="exampleInputPassword1">Nom du Pays</label>
+          <input type="text" class="form-control"name="nomPays" placeholder="FRANCE">
         </div>
 
         <button type="submit" class="btn btn-primary">Envoyer</button>
