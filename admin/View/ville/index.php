@@ -51,28 +51,78 @@ include_once '../../../boostrap.inc.php';
 
 
 <body>
-
       <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top d-flex align-items-center">
+      <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center">
 
       <div class="logo mr-auto">
-        <h1 class="text-light"><a href="index.html">Pickme <span style="color: #3498d3;">up</span></a></h1>
+        <h1 class="text-light"><a href="menu.php">Pickme <span style="color: #3498d3;">up</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="pointrelais.php">Point Relais</a></li>
-          <li><a href="pays.php">Pays</a></li>
-          <li><a href="ville.php">Ville</a></li>
-          <li><a href="commande.php">Commande</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Pays
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="../pays/ajouter.php">Ajouter</a>
+              <a class="dropdown-item" href="../pays/index.php">Consulter</a>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Ville
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="ajouter.php">Ajouter</a>
+              <a class="dropdown-item" href="index.php">Consulter</a>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Point Relais
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="../pointrelais/ajouter.php">Ajouter</a>
+              <a class="dropdown-item" href="../pointrelais/index.php">Consulter</a>
+            </div>
+          </li>
+
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Les commandes
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="../commande/index.php">Consulter</a>
+            </div>
+          </li>
+
+
+          <?php
+          if(isset($_SESSION["userAdmin"])){
+          ?>
+          <li class="get-started"><a href="../../forms/deconnexion.php">Se deconnecter</a></li>
+  
+          <?php
+          }
+          else { 
+          ?>
+          <li class="get-started"><a href="../index.php">Se connecter</a></li>
+          <?php 
+          }
+          ?>
 
       </nav><!-- .nav-menu -->
 
     </div>
   </header><!-- End Header -->
+
 
 
   
@@ -84,7 +134,7 @@ include_once '../../../boostrap.inc.php';
       <div class="container">
 
         <div class="section-title" data-aos="fade-up">
-          <h2>Consulter les pays</h2>
+          <h2>Consulter les villes</h2>
         </div>
 
         <div class="row">
@@ -100,6 +150,15 @@ include_once '../../../boostrap.inc.php';
               <h4 class="title"><?php echo htmlspecialchars($ville->getCodeVille()); ?></h4>
               <p class="description">Nom de la ville : <?php echo htmlspecialchars($ville->getNomVille()); ?></p>
               <p class="description"> Pays : <?php echo htmlspecialchars($ville->getPays()->getNomPays()); ?></p>
+              <p class="description mb-3">Affichage : <?php  if($ville->getAfficher() == 1){
+
+                echo "le point relais est affiché au public";
+
+                }else {
+
+                echo "le point relais n'est pas affiché au public";
+                } ?></p>
+              <a class="btn btn-primary mt-5" href="modifier.php?idVille=<?php echo $ville->getCodeVille(); ?>" role="button" style="bottom: 2%; position:absolute; float:right;">Modifier</a>
             </div>
 
           </div>

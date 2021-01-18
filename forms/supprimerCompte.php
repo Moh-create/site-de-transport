@@ -15,8 +15,10 @@ if(isset($_POST["motDePasse"]) && !empty($_POST["motDePasse"]))
     {
 
         $resultat = $utilisateur->delete();
-        echo $userId;
- 
+        session_destroy();
+        header('location: ../View/mesInformations.php');
+    }else{
+        header('location: ../View/index.php');
     }
 
 }

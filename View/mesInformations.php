@@ -72,7 +72,7 @@ include_once '../boostrap.inc.php';
           <li><a href="pointRelais.php">Vos point relais</a></li>
           <li><a href="commande.php">Commande</a></li>          
           <li class="active"><a href="mesInformations.php">Mon compte</a></li>
-          <li class="get-started"><a href="connexion.html">Se deconnecter</a></li>
+          <li class="get-started"><a href="../forms/formulaireDeconnexion.php">Se deconnecter</a></li>
 
           <?php
           }

@@ -277,7 +277,12 @@ include_once '../boostrap.inc.php';
 
             <?php
             
-            $collectionCommande = Commande::fetchByUtilisateur($_SESSION["utilisateur"]);       
+            $collectionCommande = Commande::fetchByUtilisateur($_SESSION["utilisateur"]);   
+            
+            if(!empty($collectionCommande))
+            {
+                
+            
             foreach($collectionCommande as $commande){
             
             ?>                           
@@ -373,6 +378,7 @@ include_once '../boostrap.inc.php';
 
             <?php
             }
+        }
             ?>
 
 

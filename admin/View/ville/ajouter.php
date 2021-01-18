@@ -53,21 +53,71 @@ include_once '../../../boostrap.inc.php';
 <body>
 
       <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top d-flex align-items-center">
+      <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center">
 
       <div class="logo mr-auto">
-        <h1 class="text-light"><a href="index.html">Pickme <span style="color: #3498d3;">up</span></a></h1>
+        <h1 class="text-light"><a href="menu.php">Pickme <span style="color: #3498d3;">up</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="pointrelais.php">Point Relais</a></li>
-          <li><a href="pays.php">Pays</a></li>
-          <li><a href="ville.php">Ville</a></li>
-          <li><a href="commande.php">Commande</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Pays
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="../pays/ajouter.php">Ajouter</a>
+              <a class="dropdown-item" href="../pays/index.php">Consulter</a>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Ville
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="ajouter.php">Ajouter</a>
+              <a class="dropdown-item" href="index.php">Consulter</a>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Point Relais
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="../pointrelais/ajouter.php">Ajouter</a>
+              <a class="dropdown-item" href="../pointrelais/index.php">Consulter</a>
+            </div>
+          </li>
+
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Les commandes
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="../commande/index.php">Consulter</a>
+            </div>
+          </li>
+
+
+          <?php
+          if(isset($_SESSION["userAdmin"])){
+          ?>
+          <li class="get-started"><a href="../../forms/deconnexion.php">Se deconnecter</a></li>
+  
+          <?php
+          }
+          else { 
+          ?>
+          <li class="get-started"><a href="../index.php">Se connecter</a></li>
+          <?php 
+          }
+          ?>
 
       </nav><!-- .nav-menu -->
 
@@ -75,11 +125,12 @@ include_once '../../../boostrap.inc.php';
   </header><!-- End Header -->
 
 
+
   
   <main id="main" style="padding-top: 15%;">
 
     <div class="section-title" data-aos="fade-up">
-      <h2>Ajouter un pays</h2>
+      <h2>Ajouter une Ville</h2>
     </div>
     <div class="container">
 

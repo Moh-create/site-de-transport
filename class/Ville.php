@@ -4,10 +4,13 @@ class Ville {
     private $codeVille;
     private $nomVille;
     private $pays;
+    private $afficher;
+    
     
     private static $select = "select * from ville";
     private static $selectById = "select * from ville where codeVille = :codeVille";
     private static $selectByPays = "select * from ville where codePays = :codePays";
+    private static $selectByAfficher = "select * from ville where afficher = 1";
     private static $insert = "insert into pays (codeVille,nomVille,codePays) values(:codeVille,:nomVille,:codePays)";
     private static $update = "update pays set nomVille=:nomVille where codeVille=:codeVille  ";
     private static $delete = "delete from pays where codeVille = :codeVille";
@@ -63,6 +66,26 @@ class Ville {
         return $this->pays;
     }
 
+        /**
+     * Get the value of afficher
+     */ 
+    public function getAfficher()
+    {
+        return $this->afficher;
+    }
+
+    /**
+     * Set the value of afficher
+     *
+     * @return  self
+     */ 
+    public function setAfficher($afficher)
+    {
+        $this->afficher = $afficher;
+
+        return $this;
+    }
+
     private static function arrayToVille(Array $array) {
 
         $ville = new Ville();
@@ -74,6 +97,8 @@ class Ville {
         if($codePays != null){
         $ville->pays = Pays::fetch($codePays);
         }
+
+        $ville->afficher = $array["afficher"];
 
         return $ville;
     }
@@ -114,6 +139,22 @@ class Ville {
 
 
     }
+
+    public static function fetchPublicPointRelais() {
+
+        $collectionVille = null;
+        $pdo = (new DBA())->getPDO();
+     
+        $pdoStatement = $pdo->query(Ville::$selectByAfficher);
+        $recordSet = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($recordSet as $record) {
+        $collectionVille[] = Ville::arrayToVille($record);
+        }
+
+        return $collectionVille;
+    }
+
 
     public static function fetchByPays($codePays) {
         $collectionProduit = null;
@@ -164,6 +205,8 @@ class Ville {
         return $resultat;
 
     }
+
+
 
 
 }
