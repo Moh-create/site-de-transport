@@ -22,7 +22,7 @@ class Utilisateur {
     private static $insertFr = "insert into utilisateur (genre,nom,prenom,email,motDePasse,telephone,adresseRue,adressePostal,codeVille) values(:genre,:nom,:prenom,:email,:motDePasse,:telephone,:adresseRue,:adressePostal,:adresseVille)";
     private static $insertRDC = "insert into utilisateur (genre,nom,prenom,email,motDePasse,telephone,adresseRue,etat,codeVille) values(:genre,:nom,:prenom,:email,:motDePasse,:telephone,:adresseRue,:etat,:adresseVille)";
     private static $update = "update utilisateur set genre=:genre,nom=:nom,prenom=:prenom,email=:email,motDePasse=:motDePasse,telephone=:telephone,adresseRue=:adresseRue,adressePostal=:adressePostal,codeVille =:adresseVille,token = :token where id=:id";
-    private static $delete = "delete from utilisateur where id = :id";
+    private static $delete = "CALL supprimer_Utilisateur(:id,@resulat)";
 
 
     /**
@@ -444,12 +444,8 @@ class Utilisateur {
         $pdo = (new DBA())->getPDO();
         $pdoStatement = $pdo->prepare(Utilisateur::$delete);
         $pdoStatement->bindParam("id", $this->id);
-        $resultat = $pdoStatement->execute();
-        $nblignesAffectees = $pdoStatement->rowCount();
-
-        if ($nblignesAffectees == 1) {
-        $this->id = null;
-        }
-        return $resultat;
+        $pdoStatement->execute();
+        $res = $pdo->query('select @resulat')->fetch();
+        return $res;
     }
 }       

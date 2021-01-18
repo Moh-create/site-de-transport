@@ -9,9 +9,9 @@ include_once '../boostrap.inc.php';
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>PICKME UP</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+  <title>PICKME UP Africa :  Envoyer des colis en afrique</title>
+  <meta content="Faites votre shopping dans les sites européens ensuite nous occupons d'envoyer vos achats en Afrique" name="description">
+  <meta content="envoyer, colis, afrique,Service,Europe,Brazzaville,Pointe-Noire,Kinshasa,Start-up,pickmeup pickme up Afrique" name="keywords">
 
   <!-- Favicons -->
   <link href="../assets/img/favicon.png" rel="icon">
@@ -109,25 +109,25 @@ include_once '../boostrap.inc.php';
                   <div style="overflow: auto-hidden;">
                       <div class="care">
                         <div class="img-px">
-                          <img src="../assets/img/image-entreprise/loding.jpeg" class="img-fluid" alt="...">
+                          <img src="../assets/img/image-entreprise/loding.jpeg" class="img-fluid" alt="loding">
                         </div>
                         <div class="img-px">
-                          <img src="../assets/img/image-entreprise/asos.jpeg" class="img-fluid" alt="...">
+                          <img src="../assets/img/image-entreprise/asos.jpeg" class="img-fluid" alt="asos">
                         </div>
                         <div class="img-px">
-                          <img src="../assets/img/image-entreprise/boohoo.jpeg" class="img-fluid" alt="..." >
+                          <img src="../assets/img/image-entreprise/boohoo.jpeg" class="img-fluid" alt="boohoo" >
                         </div>
                         <div class="img-px">
-                          <img src="../assets/img/image-entreprise/aliexpress.jpeg" class="img-fluid" alt="..." >
+                          <img src="../assets/img/image-entreprise/aliexpress.jpeg" class="img-fluid" alt="aliexpress" >
                         </div>
                         <div class="img-px">
-                          <img src="../assets/img/image-entreprise/pretty.jpeg" class="img-fluid" alt="..." >
+                          <img src="../assets/img/image-entreprise/pretty.jpeg" class="img-fluid" alt="pretty" >
                         </div>
                         <div class="img-px">
-                          <img src="../assets/img/image-entreprise/cdiscount.jpeg" class="img-fluid" alt="..." >
+                          <img src="../assets/img/image-entreprise/cdiscount.jpeg" class="img-fluid" alt="cdiscount" >
                         </div>
                        <div class="img-px">
-                          <img src="../assets/img/image-entreprise/amazon.jpeg" class="img-fluid" alt="..." >
+                          <img src="../assets/img/image-entreprise/amazon.jpeg" class="img-fluid" alt="amazon" >
                         </div>
                       </div>
                   </div>

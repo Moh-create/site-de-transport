@@ -57,9 +57,9 @@ session_start();
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="index.php">Accueil</a></li>
+          <li ><a href="index.php">Accueil</a></li>
           <li><a href="presentation.php">Qui sommes nous ?</a></li>
-          <li><a href="offre.php">Nos offres</a></li>
+          <li class="active"><a href="offre.php">Nos offres</a></li>
 
           <?php
           if(isset($_SESSION["utilisateur"])){

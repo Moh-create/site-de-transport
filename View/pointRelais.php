@@ -61,14 +61,14 @@ include_once '../boostrap.inc.php';
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="#index.html">Accueil</a></li>
-          <li><a href="presentation.html">Qui sommes nous ?</a></li>
-          <li><a href="offre.html">Nos offres</a></li>
+          <li><a href="index.php">Accueil</a></li>
+          <li><a href="presentation.php">Qui sommes nous ?</a></li>
+          <li><a href="offre.php">Nos offres</a></li>
 
           <?php
           if(isset($_SESSION["utilisateur"])){
           ?>
-          <li><a href="pointRelais.php">Vos point relais</a></li>
+          <li class="active"><a href="pointRelais.php">Vos point relais</a></li>
           <li><a href="commande.php">Commande</a></li>          
           <li><a href="mesInformations.php">Mon compte</a></li>
           <li class="get-started"><a href="../forms/formulaireDeconnexion.php">Se deconnecter</a></li>

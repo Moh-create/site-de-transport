@@ -50,7 +50,8 @@ if( isset($_POST["genre"]) && isset($_POST["nom"]) && isset($_POST["prenom"]) &&
 
     $utilisateur->setAdresseRue($_POST["adresseRue"]);        
     $utilisateur->save();
-
+    session_start();
+    $_SESSION["utilisateur"] = $utilisateur->getId();
     header('location: ../View/commande.php');
     exit;
 

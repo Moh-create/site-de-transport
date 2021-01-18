@@ -224,7 +224,7 @@ class Commande {
         $pdoStatement->bindParam(":id", $codeUtilisateur);
         $pdoStatement->execute();
         $recordSet = $pdoStatement->fetchAll(PDO::FETCH_ASSOC);
-
+  
         foreach ($recordSet as $record) {
         $collectionCommande[] = Commande::arrayToCommande($record);
         }

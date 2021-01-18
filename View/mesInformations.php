@@ -62,16 +62,16 @@ include_once '../boostrap.inc.php';
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="#index.html">Accueil</a></li>
-          <li><a href="presentation.html">Qui sommes nous ?</a></li>
-          <li><a href="offre.html">Nos offres</a></li>
+          <li ><a href="index.php">Accueil</a></li>
+          <li><a href="presentation.php">Qui sommes nous ?</a></li>
+          <li><a href="offre.php">Nos offres</a></li>
 
           <?php
           if(isset($_SESSION["utilisateur"])){
           ?>
           <li><a href="pointRelais.php">Vos point relais</a></li>
           <li><a href="commande.php">Commande</a></li>          
-          <li><a href="mesInformations.php">Mon compte</a></li>
+          <li class="active"><a href="mesInformations.php">Mon compte</a></li>
           <li class="get-started"><a href="connexion.html">Se deconnecter</a></li>
 
           <?php
@@ -228,7 +228,10 @@ include_once '../boostrap.inc.php';
     <div class="section-title" data-aos="fade-up">
       <h2>Adresse de livraison</h2>
     </div>
-    <section id="services" class="services">
+
+
+
+<section id="services" class="services">
 
 <?php
   $livraison = new Livraison();
@@ -389,7 +392,24 @@ include_once '../boostrap.inc.php';
 </div>
 
 
+
 </section><!-- End Services Section -->
+
+
+    <div class="section-title" data-aos="fade-up">
+      <h2>Supprimer Mon compte</h2>
+    </div>
+
+    <div class="container">
+        <form action= "../forms/supprimerCompte.php" method="post">
+              <div class="form-group" id="nom">
+                <label for="exampleFormControlInput1">Saisir votre mot de Passse</label> 
+                <input class="form-control" name="motDePasse" type="password" required>
+              </div>
+
+              <button type="submit" class="btn btn-danger mt-3">Supprimer</button>                  
+        </form>
+    </div>
 
 
 

@@ -60,15 +60,15 @@ include_once '../boostrap.inc.php';
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="index.php">Accueil</a></li>
+          <li><a href="index.php">Accueil</a></li>
           <li><a href="presentation.php">Qui sommes nous ?</a></li>
-          <li><a href="offre.html">Nos offres</a></li>
+          <li><a href="offre.php">Nos offres</a></li>
 
           <?php
           if(isset($_SESSION["utilisateur"])){
           ?>
           <li><a href="pointRelais.php">Vos point relais</a></li>
-          <li><a href="commande.php">Commande</a></li>   
+          <li class="active"><a href="commande.php">Commande</a></li>   
           <li><a href="mesInformations.php">Mon compte</a></li>
           <li class="get-started"><a href="../forms/formulaireDeconnexion.php">Se deconnecter</a></li>
   
@@ -96,10 +96,10 @@ include_once '../boostrap.inc.php';
         <div class="row justify-content-center pt-4">
             <div class="choix-paiement align-items-center">
             <div class="col-lg-7 col-md-12">
-                 <button type="button" class="btn btn-outline-primary " onclick="addCommande()">Ajouter une commande</button>
+            <a class="btn btn-primary" href="#ajouterCommande" role="button">Ajouter une Commande</a>
             </div>
             <div class="col-lg-6 col-md-12">
-                <button type="button" class="btn btn-outline-primary " onclick="voirCommande()">Voir mes commandes</button>
+            <a class="btn btn-primary" href="#voirCommande" role="button">Voir mes commandes</a>
             </div>
            
             </div>
@@ -268,13 +268,16 @@ include_once '../boostrap.inc.php';
                 </div>
             </div>
 
-
-        <div id="voirCommande">
+         <div id="voirCommande">   
+                <div class="section-title" data-aos="fade-up">
+                <h2>Voir mes commandes</h2>
+            </div>
+       
             <div class="container">
 
             <?php
             
-            $collectionCommande = Commande::fetchByUtilisateur($_SESSION["utilisateur"]);                              
+            $collectionCommande = Commande::fetchByUtilisateur($_SESSION["utilisateur"]);       
             foreach($collectionCommande as $commande){
             
             ?>                           
@@ -375,11 +378,8 @@ include_once '../boostrap.inc.php';
 
 
             </div>
-
-
         </div>
 
- 
 
     </main>
 
@@ -402,7 +402,6 @@ include_once '../boostrap.inc.php';
 
       document.getElementById('lesPointsRelais').hidden = true;
       document.getElementById('adresseLivraison').hidden = true;
-      document.getElementById('voirCommande').hidden = true;
 
     function ClickPointRelais(){
 
@@ -439,15 +438,6 @@ include_once '../boostrap.inc.php';
 
 
 
-    function addCommande(){
-        document.getElementById('ajouterCommande').hidden = false;
-        document.getElementById('voirCommande').hidden = true;
-    }
-
-    function voirCommande(){
-        document.getElementById('voirCommande').hidden = false;
-        document.getElementById('ajouterCommande').hidden = true;
-    }
 
 
 
