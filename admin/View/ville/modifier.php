@@ -151,7 +151,7 @@ include_once '../../../boostrap.inc.php';
 
         ?>
 
-          <form method="post" action="../../forms/modifierPointRelais.php" class="mt-4">
+          <form method="post" action="../../forms/modifierVille.php" class="mt-4">
 
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Nom</label> 

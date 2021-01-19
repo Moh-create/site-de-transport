@@ -148,7 +148,7 @@ $collectionEtatCommande = ["attente","en cours","livrée","terminée","annulée"
 
             $commande = Commande::fetch($id);
 
-            session_start();
+           
             $_SESSION["id"] = $id;
 
           ?>

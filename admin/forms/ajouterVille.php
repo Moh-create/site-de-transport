@@ -13,4 +13,6 @@ if(isset($_POST["codeVille"]) && !empty($_POST["codeVille"]) && isset($_POST["pa
     $ville->insert();
 
     header('location: ../View/ville/index.php');
+}else{
+    header('location: ../View/ville/index.php');
 }

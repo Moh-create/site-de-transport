@@ -79,8 +79,8 @@ include_once '../../../boostrap.inc.php';
               Ville
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="../ajouter.php">Ajouter</a>
-              <a class="dropdown-item" href="../index.php">Consulter</a>
+              <a class="dropdown-item" href="../ville/ajouter.php">Ajouter</a>
+              <a class="dropdown-item" href="../ville/index.php">Consulter</a>
             </div>
           </li>
 

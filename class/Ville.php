@@ -11,9 +11,9 @@ class Ville {
     private static $selectById = "select * from ville where codeVille = :codeVille";
     private static $selectByPays = "select * from ville where codePays = :codePays";
     private static $selectByAfficher = "select * from ville where afficher = 1";
-    private static $insert = "insert into pays (codeVille,nomVille,codePays) values(:codeVille,:nomVille,:codePays)";
-    private static $update = "update pays set nomVille=:nomVille where codeVille=:codeVille  ";
-    private static $delete = "delete from pays where codeVille = :codeVille";
+    private static $insert = "insert into ville (codeVille,nomVille,codePays) values(:codeVille,:nomVille,:codePays)";
+    private static $update = "update ville set nomVille=:nomVille, codePays = :codePays, afficher = :afficher where codeVille=:codeVille";
+    private static $delete = "delete from ville where codeVille = :codeVille";
 
 
     /**
@@ -105,6 +105,9 @@ class Ville {
 
 
 
+
+
+
     public static function fetchAll() {
         $collectionProduit = null;
 
@@ -177,8 +180,8 @@ class Ville {
 
         $pdo = (new DBA())->getPDO();
         $pdoStatement = $pdo->prepare(Ville::$insert);
-        $pdoStatement->bindParam(":codeVille", $this->codePays);
-        $pdoStatement->bindParam(":nomVille",$this->nomPays);
+        $pdoStatement->bindParam(":codeVille", $this->codeVille);
+        $pdoStatement->bindParam(":nomVille",$this->nomVille);
 
         if ($this->pays != null) {
             $codePays = $this->pays->getCodePays();
@@ -187,7 +190,25 @@ class Ville {
         $pdoStatement->bindParam(":codePays",$codePays);        
         $pdoStatement->execute();
 
-        $this->codePays = $pdo->lastInsertId();
+    
+
+    }
+
+    public function update(){
+
+        $pdo = (new DBA())->getPDO();
+        $pdoStatement = $pdo->prepare(Ville::$update);
+        $pdoStatement->bindParam(":codeVille", $this->codeVille);
+        $pdoStatement->bindParam(":nomVille",$this->nomVille);
+
+        if ($this->pays != null) {
+            $codePays = $this->pays->getCodePays();
+        }
+
+        $pdoStatement->bindParam(":codePays",$codePays);
+        $pdoStatement->bindParam(":afficher",$this->afficher);              
+        $pdoStatement->execute();
+    
 
     }
 
