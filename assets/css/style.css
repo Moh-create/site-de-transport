@@ -1615,7 +1615,6 @@ section {
 #message{
   position: fixed;
 	width:300px;
-	height:550px;
 	bottom:120px;
 	right:40px;
 	color:#111;
@@ -1704,9 +1703,6 @@ section {
   align-items: center;
   margin-right: 5%;
 }
-
-
-
 
 .connexion  {
   margin-left: 20%;

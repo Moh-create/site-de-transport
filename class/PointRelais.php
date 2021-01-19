@@ -278,7 +278,7 @@ class PointRelais {
     public function delete() {
         $pdo = (new DBA())->getPDO();
         $pdoStatement = $pdo->prepare(PointRelais::$delete);
-        $pdoStatement->bindParam("id", $this->id);
+        $pdoStatement->bindParam(":id", $this->id);
         $resultat = $pdoStatement->execute();
         $nblignesAffectees = $pdoStatement->rowCount();
 
