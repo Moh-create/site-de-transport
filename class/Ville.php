@@ -143,7 +143,7 @@ class Ville {
 
     }
 
-    public static function fetchPublicPointRelais() {
+    public static function fetchPublicVille() {
 
         $collectionVille = null;
         $pdo = (new DBA())->getPDO();

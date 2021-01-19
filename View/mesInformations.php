@@ -254,7 +254,7 @@ include_once '../boostrap.inc.php';
                       <label for="exampleFormControlInput1">Ville</label> 
                       <select  class="form-control" name="ville">
                       <?php
-                        $collectionVille = Ville::fetchAll();
+                        $collectionVille = Ville::fetchPublicVille();
 
                         foreach($collectionVille as $ville)
                         {
