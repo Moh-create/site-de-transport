@@ -9,13 +9,14 @@ include_once '../boostrap.inc.php';
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>PICKME UP Africa :  Envoyer des colis en afrique</title>
-  <meta content="Faites votre shopping dans les sites européens ensuite nous occupons d'envoyer vos achats en Afrique" name="description">
+  <title>Comment acheter des produits depuis l'afrique ?</title>
+  <meta content="Acheter sur tous les sites et se faire livrer à son domicile ou à son bureau en Afrique." name="description">
   <meta content="envoyer, colis, afrique,Service,Europe,Brazzaville,Pointe-Noire,Kinshasa,Start-up,pickmeup pickme up Afrique" name="keywords">
 
-  <!-- Favicons -->
-  <link href="../assets/img/favicon.png" rel="icon">
-  <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  
+  <link rel="shortcut icon" href="../assets/img/iconpickmeup.ico" type="image/x-icon">
+
+
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -217,7 +218,7 @@ include_once '../boostrap.inc.php';
 
               <div>
                 <i class="ri-mail-send-line"></i>
-                <p>info@example.com</p>
+                <p>pickmeup.afrique@gmail.com</p>
               </div>
 
               <div>
@@ -276,7 +277,7 @@ include_once '../boostrap.inc.php';
         <?php
             $collectionSav = Sav::fetchAll();
 
-
+           
             foreach($collectionSav as $sav) 
             {
         ?>
@@ -296,7 +297,7 @@ include_once '../boostrap.inc.php';
 
 </div>
 
-  <!-- ======= Footer ======= -->
+   <!-- ======= Footer ======= -->
   <footer id="footer">
     <div class="container">
       <div class="row d-flex align-items-center">

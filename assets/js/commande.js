@@ -9,6 +9,7 @@
        if(verification)
        {
         document.getElementById('lesPointsRelais').hidden = false;
+  
 
        }else {
 
@@ -161,9 +162,13 @@
                 document.getElementById('modeLivraison').appendChild(createSpan);
 
             }
+
             
 
         }
+
+
+
 
     });
 
@@ -191,4 +196,10 @@
 
         }
 
+ 
+
     });
+
+
+
+

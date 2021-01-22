@@ -51,9 +51,8 @@ include_once '../../../boostrap.inc.php';
 
 
 <body>
-
-      <!-- ======= Header ======= -->
-      <header id="header" class="fixed-top d-flex align-items-center">
+       <!-- ======= Header ======= -->
+       <header id="header" class="fixed-top d-flex align-items-center">
     <div class="container d-flex align-items-center">
 
       <div class="logo mr-auto">
@@ -79,8 +78,8 @@ include_once '../../../boostrap.inc.php';
               Ville
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="ajouter.php">Ajouter</a>
-              <a class="dropdown-item" href="index.php">Consulter</a>
+              <a class="dropdown-item" href="../ajouter.php">Ajouter</a>
+              <a class="dropdown-item" href="../index.php">Consulter</a>
             </div>
           </li>
 
@@ -104,12 +103,13 @@ include_once '../../../boostrap.inc.php';
             </div>
           </li>
 
+
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Service client
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="../sav/index.php">Consulter</a>
+              <a class="dropdown-item" href="index.php">Consulter</a>
             </div>
           </li>
 
@@ -135,7 +135,6 @@ include_once '../../../boostrap.inc.php';
   </header><!-- End Header -->
 
 
-
   
   <main id="main" style="padding-top:10%;">
 
@@ -145,72 +144,69 @@ include_once '../../../boostrap.inc.php';
       <div class="container">
 
         <div class="section-title" data-aos="fade-up">
-          <h2>Modifier une ville</h2>
+          <h2>Modifier le point relais</h2>
         </div>
 
         <?php
-            if(!isset($_GET["idVille"]) && empty($_GET["idVille"])){
+            if(!isset($_GET["idSav"]) && empty($_GET["idSav"])){
                 header('location: index.php');
             }
 
-            $idVille = $_GET["idVille"];
-            $_SESSION["idVille"] = $idVille;
-            $ville = Ville::fetch($idVille);
-
+            $idSav = $_GET["idSav"];;
+            $_SESSION["idSav"] = $idSav;
+            $sav = Sav::fetch($idSav);
 
 
         ?>
 
-          <form method="post" action="../../forms/modifierVille.php" class="mt-4">
+          <form method="post" action="../../forms/modifierSav.php" class="mt-4">
 
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Nom</label> 
-                    <input class="form-control" name="nom" type="text" value= "<?php echo $ville->getNomVille(); ?>" required>
+                    <input class="form-control" name="nom" type="text" value= "<?php echo $sav->getNom(); ?>" required>
                 </div>
 
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Numero de telephone </label> 
+                    <input class="form-control" name="telephone" type="text" value= "<?php echo $sav->getNumero(); ?>"required >
+                </div>
 
                 <div class="form-group">
 
-                        <label for="exampleFormControlInput1">Pays</label>
-                        <select  class="form-control" name="pays" required>
+                        <label for="exampleFormControlInput1">Ville</label>
+                        <select  class="form-control" name="ville" required>
                         <?php
 
-                        $collectionPays = Pays::fetchAll();
+                        $collectionVille = Ville::fetchAll();
 
-                        foreach($collectionPays as $pays)
+                        foreach($collectionVille as $ville)
                         {
-                            if($pays->getCodePays() == $ville->getPays()->getCodePays())
+
+                            if($ville->getCodeVille() == $sav->getVille()->getCodeVille())
                             {
+
+                            
+                
                         ?>
 
+                            <option value="<?php echo $ville->getCodeVille(); ?>" selected><?php echo $ville->getNomVille(); ?></option>
 
-                            <option value="<?php echo $pays->getCodePays(); ?>" selected ><?php echo $pays->getNomPays(); ?></option>
+                            <?php
 
-                        <?php    
-                            }
+                            }else{
 
-                        ?>
-                            <option value="<?php echo $pays->getCodePays(); ?>"><?php echo $pays->getNomPays(); ?></option>
-                        
+                            ?>
+
+                            <option value="<?php echo $ville->getCodeVille(); ?>" ><?php echo $ville->getNomVille(); ?></option>
+
                         <?php
+                            }
+                      
                         }
                         ?>
 
                         </select>
                 </div>
-
-
-                <div class="form-group">
-
-                        <label for="exampleFormControlInput1">Afficher</label>
-                        <select  class="form-control" name="afficher" required>
-
-                            <option selected> <?php if($ville->getAfficher() == true){ echo "Oui"; }else{ echo "Non";} ?></option>
-                            <option> <?php if($ville->getAfficher() == false){ echo "Oui"; }else{ echo "Non";} ?></option>
-
-                        </select>
-                </div>
-
 
 
                 <button type="submit" class="btn btn-primary">Moidifier le point relais</button>

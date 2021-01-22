@@ -20,9 +20,7 @@ include_once '../boostrap.inc.php';
     <meta content="" name="description">
     <meta content="" name="keywords">
     
-    <!-- Favicons -->
-    <link href="../assets/img/favicon.png" rel="icon">
-    <link href="../assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -358,12 +356,12 @@ include_once '../boostrap.inc.php';
                   <div class="row pt-4">
 
                         <div class="col-lg-6 col-sm-12" id="nom">
-                          <label for="exampleFormControlInput1">Etat</label> 
+                          <label for="exampleFormControlInput1">Etat ou Code Postal</label> 
                           <input class="form-control" name="etat" type="text" value="<?php echo $livraison->getEtat(); ?>">
                         </div>
 
                         <div class="col-lg-6 col-sm-12" id="prenom">
-                          <label for="exampleFormControlInput1">Telehone</label> 
+                          <label for="exampleFormControlInput1">Telephone</label> 
                           <input class="form-control" name ="telephone" type="text"  value="<?php echo $livraison->getTelephone(); ?>">
                         </div>
 

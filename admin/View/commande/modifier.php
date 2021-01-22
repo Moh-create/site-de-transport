@@ -58,7 +58,7 @@ $collectionEtatCommande = ["attente","en cours","livrée","terminée","annulée"
     <div class="container d-flex align-items-center">
 
       <div class="logo mr-auto">
-        <h1 class="text-light"><a href="menu.php">Pickme <span style="color: #3498d3;">up</span></a></h1>
+        <h1 class="text-light"><a href="../menu.php">Pickme <span style="color: #3498d3;">up</span></a></h1>
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>
@@ -105,6 +105,16 @@ $collectionEtatCommande = ["attente","en cours","livrée","terminée","annulée"
             </div>
           </li>
 
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Service client
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="../sav/index.php">Consulter</a>
+            </div>
+          </li>
+
+
 
           <?php
           if(isset($_SESSION["userAdmin"])){
@@ -142,7 +152,7 @@ $collectionEtatCommande = ["attente","en cours","livrée","terminée","annulée"
 
           <?php 
           if(!isset($_GET["idCommande"]) && empty($_GET["idCommande"])){
-              header('location: consulter.php');
+              header('location: index.php');
           }
           $id = $_GET["idCommande"];
 
