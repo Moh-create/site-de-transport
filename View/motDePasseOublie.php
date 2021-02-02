@@ -8,6 +8,8 @@
     <meta content="" name="description">
     <meta content="" name="keywords">
   
+    <link  rel = "shortcut icon"  href = "../assets/img/favicon_1.ico"  type = "image / x-icon" > 
+  <link  rel = "icon"  href = "../assets/img/favicon_1.ico"  type = "image / x-icon" >
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -36,7 +38,7 @@
         <div class="container d-flex align-items-center">
     
           <div class="logo mr-auto">
-            <h1 class="text-light"><a href="index.html">Pickme <span style="color: #3498d3;">up</span></a></h1>
+            <h1 class="text-light"><a href="index.php">Pickme <span style="color: #3498d3;">up</span></a></h1>
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
           </div>

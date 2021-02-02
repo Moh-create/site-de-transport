@@ -163,10 +163,15 @@
 
             }
 
-            
+        }else if(document.getElementById('modeLivraison').children[1][0].checked == false){
 
+            document.getElementById('modeLivraison').children[1][0].checked = false;
+
+            if(document.getElementById('modeLivraison').children[2] != null){
+
+                document.getElementById('modeLivraison').children[2].remove(); 
+            }
         }
-
 
 
 
@@ -192,11 +197,21 @@
                 document.getElementById('modeLivraison').appendChild(createSpan);
 
             }
-            
+        
 
         }
+        else if(document.getElementById('modeLivraison').children[0][0].checked == false){
 
- 
+            document.getElementById('modeLivraison').children[0][0].checked = false;
+
+            if(document.getElementById('modeLivraison').children[2] != null){
+
+                
+                document.getElementById('modeLivraison').children[2].remove(); 
+                
+            }
+            
+        }
 
     });
 

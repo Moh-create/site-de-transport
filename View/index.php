@@ -14,7 +14,8 @@ include_once '../boostrap.inc.php';
   <meta content="envoyer, colis, afrique,Service,Europe,Brazzaville,Pointe-Noire,Kinshasa,Start-up,pickmeup pickme up Afrique" name="keywords">
 
   
-  <link rel="shortcut icon" href="../assets/img/iconpickmeup.ico" type="image/x-icon">
+  <link  rel = "shortcut icon"  href = "../assets/img/favicon_1.ico"  type = "image / x-icon" > 
+  <link  rel = "icon"  href = "../assets/img/favicon_1.ico"  type = "image / x-icon" >
 
 
 
@@ -312,14 +313,6 @@ include_once '../boostrap.inc.php';
             <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/vesperr-free-bootstrap-template/ -->
             Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
           </div>
-        </div>
-        <div class="col-lg-6">
-          <nav class="footer-links text-lg-right text-center pt-2 pt-lg-0">
-            <a href="#intro" class="scrollto">Home</a>
-            <a href="#about" class="scrollto">About</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Use</a>
-          </nav>
         </div>
       </div>
     </div>

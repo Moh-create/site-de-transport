@@ -481,7 +481,7 @@ section {
   padding-bottom: 30px;
 }
 
-.section-title h2 {
+.section-title h1, h2 {
   font-size: 32px;
   font-weight: bold;
   text-transform: uppercase;
@@ -489,7 +489,7 @@ section {
   color: #222222;
 }
 
-.section-title h2::before, .section-title h2::after {
+.section-title h2::before, .section-title h2::after, .section-title h1::before, .section-title h1::after{
   content: '';
   width: 50px;
   height: 2px;
@@ -497,11 +497,11 @@ section {
   display: inline-block;
 }
 
-.section-title h2::before {
+.section-title h2::before , .section-title h1::before{
   margin: 0 15px 10px 0;
 }
 
-.section-title h2::after {
+.section-title h2::after, .section-title h1::after {
   margin: 0 0 10px 15px;
 }
 

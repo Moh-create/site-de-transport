@@ -15,10 +15,13 @@ session_start();
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>PICKME UP</title>
+  <title>Chez pickme up nous avons plusieurs</title>
   <meta content="Pickme up propose plusieurs offres aux particuliers et aux proffesionnels" name="description">
   <meta content="pickme up,entreprise,colis,archivage" name="keywords">
 
+ 
+  <link  rel = "shortcut icon"  href = "../assets/img/favicon_1.ico"  type = "image / x-icon" > 
+  <link  rel = "icon"  href = "../assets/img/favicon_1.ico"  type = "image / x-icon" >
  
 
   <!-- Google Fonts -->
@@ -91,7 +94,7 @@ session_start();
         <div class="container">
   
                 <div class="section-title" data-aos="fade-up">
-                    <h2>offres particuliers</h2>
+                    <h1>offres particuliers</h1>
                     <p class="pt-3">Commandez des produits sur des sites en ligne du monde entier et faites-vous livré à votre
                         domicile ou votre bureau à Brazzaville, Pointe-Noire et Kinshasa.</p>
                 </div>

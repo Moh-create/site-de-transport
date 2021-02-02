@@ -20,6 +20,8 @@ include_once '../boostrap.inc.php';
     <meta content="" name="description">
     <meta content="" name="keywords">
     
+    <link  rel = "shortcut icon"  href = "../assets/img/favicon_1.ico"  type = "image / x-icon" > 
+  <link  rel = "icon"  href = "../assets/img/favicon_1.ico"  type = "image / x-icon" >
 
     
     <!-- Google Fonts -->

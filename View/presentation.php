@@ -15,7 +15,8 @@ session_start();
         <meta content="Pickmeupafrique, start-up,presentation, entreprise" name="keywords">
       
         <!-- Favicons -->
-
+        <link  rel = "shortcut icon"  href = "../assets/img/favicon_1.ico"  type = "image / x-icon" > 
+  <link  rel = "icon"  href = "../assets/img/favicon_1.ico"  type = "image / x-icon" >
       
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -34,6 +35,7 @@ session_start();
       
         <!-- Template Main CSS File -->
         <link href="../assets/css/style.css" rel="stylesheet">
+        <link href="../assets/css/stylepart2.css" rel="stylesheet">
       
         <!-- =======================================================
         * Template Name: Vesperr - v2.3.0
@@ -90,7 +92,7 @@ session_start();
             <div class="container">
       
                     <div class="section-title" data-aos="fade-up">
-                        <h2>qui sommes nous ?</h2>
+                        <h1>qui sommes nous ?</h1>
                     </div>
                     <div class="row align-items-center">
                         <div class="col-lg-6 col-md-12 col-sm-12  ">
@@ -100,8 +102,8 @@ session_start();
                                     Afrique souhaitant faire des achats sur des sites de vente en ligne internationaux.</p>
                             </div>
                         </div>
-                            <div class="col-lg-6 col-md-12  col-sm-12 ">
-                                <img src="../assets/img/—Pngtree—airplane route map_5415992.png" class="aos-init aos-animate" alt="" data-aos="zoom-in" height="400" width="400" >
+                            <div class="col-lg-6 col-md-12  col-sm-12 voyage-colis">
+                                <img src="../assets/img/—Pngtree—airplane route map_5415992.png" class="aos-init aos-animate" alt="" data-aos="zoom-in" height="300" width="300" >
                             </div>
 
                         </div>
